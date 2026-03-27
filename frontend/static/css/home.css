@@ -1,0 +1,272 @@
+/* Reset sidebar margins for landing page */
+body.landing-page .main-content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+}
+
+body.landing-page #sidebar {
+    display: none !important;
+}
+
+/* ==========================
+   SOC Landing Page Styles
+   ========================== */
+
+/* Variables & Global */
+:root {
+    --hero-bg: #f8fbff;
+    --section-padding: 100px 0;
+}
+
+/* Navbar Branding */
+.navbar-landing .navbar-brand {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--soc-blue-dark);
+}
+
+/* Hero Section */
+.hero-wrapper {
+    background: linear-gradient(135deg, #ffffff 0%, #eef5ff 100%);
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-wrapper::before {
+    content: "";
+    position: absolute;
+    top: -10%;
+    right: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--soc-blue-light) 0%, transparent 70%);
+    opacity: 0.15;
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--soc-blue-dark);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: #4a5568;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+}
+
+/* Features Section */
+.section-features {
+    padding: var(--section-padding);
+    background: #fff;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--soc-blue-dark);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #718096;
+    margin-bottom: 4rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.feature-card {
+    padding: 40px;
+    border-radius: 24px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(42, 75, 140, 0.08);
+    border-color: var(--soc-blue-light);
+}
+
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: rgba(42, 75, 140, 0.05);
+    color: var(--soc-blue-dark);
+}
+
+/* User Roles Section */
+.section-roles {
+    padding: var(--section-padding);
+    background: #f8fafc;
+}
+
+.role-card {
+    background: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.role-header {
+    padding: 40px;
+    color: #fff;
+}
+
+.role-trader { background: var(--soc-blue-dark); }
+.role-manufacturer { background: var(--soc-blue-medium); }
+
+.role-body {
+    padding: 40px;
+    flex-grow: 1;
+}
+
+.role-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+.role-list li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #4a5568;
+}
+
+.role-list li i {
+    color: #28a745;
+}
+
+/* Pricing Section */
+.section-pricing {
+    padding: var(--section-padding);
+    background: #fff;
+}
+
+.pricing-card {
+    padding: 40px;
+    border-radius: 24px;
+    background: #fff;
+    border: 2px solid #edf2f7;
+    transition: all 0.3s ease;
+    height: 100%;
+    position: relative;
+}
+
+.pricing-card.popular {
+    border-color: var(--soc-blue-medium);
+    background: #fbfdff;
+}
+
+.popular-badge {
+    position: absolute;
+    top: 20px;
+    background: var(--soc-blue-medium);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+[dir="ltr"] .popular-badge {
+    right: 20px;
+    left: auto;
+}
+[dir="rtl"] .popular-badge {
+    right: auto;
+    left: 20px;
+}
+
+.price-tag {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--soc-blue-dark);
+    margin: 1.5rem 0;
+}
+
+.price-tag span {
+    font-size: 1rem;
+    color: #718096;
+    font-weight: 500;
+}
+
+/* CTA Section */
+.section-cta {
+    padding: 80px 0;
+}
+
+.cta-banner {
+    background: linear-gradient(to right, var(--soc-blue-dark), var(--soc-blue-medium));
+    border-radius: 40px;
+    padding: 60px;
+    color: #fff;
+    text-align: center;
+}
+
+/* LTR/RTL Fixes */
+[dir="rtl"] .hero-title {
+    font-family: 'Cairo', sans-serif;
+}
+
+[dir="rtl"] .hero-subtitle {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+[dir="rtl"] .search-minimal i {
+    left: auto !important;
+    right: 15px !important;
+}
+
+[dir="rtl"] .fa-chevron-right {
+    transform: rotate(180deg);
+}
+
+/* Animations */
+.animate-up {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    .hero-title { font-size: 2.5rem; }
+    .hero-wrapper { padding: 80px 0 60px; }
+}

@@ -1,0 +1,276 @@
+{% extends "index.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% get_current_language as current_lang %}
+{% get_current_language_bidi as IS_RTL %}
+{% block title %}
+    {% trans "Create Account" %}
+{% endblock title %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}?v={% now "U" %}" />
+{% endblock extra_css %}
+{% block nav %}
+{% endblock nav %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block content %}
+    <div class="auth-container auth-page-bg min-vh-100 d-flex align-items-center justify-content-center p-3 py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-11">
+                    <div class="card auth-card border-0 shadow-lg">
+                        <div class="row g-0">
+                            <!-- Left Side - Visual Branding -->
+                            <div class="col-lg-4 d-none d-lg-flex flex-column justify-content-center p-5 auth-branding">
+                                <div class="text-center text-white">
+                                    <div class="brand-logo mb-4">
+                                        <img src="{% static 'icons/logo.jpg' %}"
+                                             alt="SOC ICON"
+                                             class="w-75 rounded m-auto" />
+                                    </div>
+                                    <p class="fs-5 mb-4">
+                                        {% if IS_RTL %}
+                                            ذكي الإستغلال
+                                        {% else %}
+                                            {% trans "Smart Operating Cycle" %}
+                                        {% endif %}
+                                    </p>
+                                    <div class="mt-4 pt-4 border-top border-white-25">
+                                        <div class="d-flex flex-column gap-3">
+                                            <div class="feature-item d-flex align-items-center gap-3 text-end p-3">
+                                                <i class="fas fa-box feature-icon"></i>
+                                                <span class="small text-truncate text-start">{% trans "Smart Inventory Management" %}</span>
+                                            </div>
+                                            <div class="feature-item d-flex align-items-center gap-3 text-end p-3">
+                                                <i class="fas fa-file-invoice feature-icon"></i>
+                                                <span class="small text-truncate text-start">{% trans "Sales and Purchase Invoices" %}</span>
+                                            </div>
+                                            <div class="feature-item d-flex align-items-center gap-3 text-end p-3">
+                                                <i class="fas fa-chart-bar feature-icon"></i>
+                                                <span class="small text-truncate text-start">{% trans "Financial Reports and Analytics" %}</span>
+                                            </div>
+                                            <div class="feature-item d-flex align-items-center gap-3 text-end p-3">
+                                                <i class="fas fa-industry feature-icon"></i>
+                                                <span class="small text-truncate text-start">{% trans "Production Management" %}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Right Side - Signup Form -->
+                            <div class="col-lg-8 p-4 p-lg-5 auth-form-section">
+                                <div class="language-switcher-top">
+                                    {% include "partials/language_switcher.html" %}
+
+                                </div>
+                                <div class="text-center mb-4">
+                                    <div class="d-lg-none mb-3">
+                                        <i class="fas fa-cube fa-3x brand-logo-icon"></i>
+                                    </div>
+                                    <h3 class="fw-bold mb-2 form-title">
+                                        {% trans "Create Account" %}
+                                    </h3>
+                                    <p class="text-muted">
+                                        {% trans "Register your business and start your journey with SOC" %}
+                                    </p>
+                                </div>
+                                {% include "partials/errorList.html" with form_id="signupForm" %}
+
+                                <form method="post"
+                                      action="{% url 'user_auth:signup' %}"
+                                      class="form"
+                                      id="signupForm"
+                                      enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="row g-3">
+                                        <!-- First Name -->
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold small" for="first_name">
+                                                {% trans "First Name" %} <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="first_name"
+                                                   name="first_name"
+                                                   placeholder="{% trans "Enter your first name" %}"
+                                                   required
+                                                   autocomplete="given-name" />
+                                        </div>
+                                        <!-- Last Name -->
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold small" for="last_name">
+                                                {% trans "Last Name" %} <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="last_name"
+                                                   name="last_name"
+                                                   placeholder="{% trans "Enter your last name" %}"
+                                                   required
+                                                   autocomplete="family-name" />
+                                        </div>
+                                        <!-- Business Name -->
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold small" for="business_name">
+                                                {% trans "Business Name" %} <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="business_name"
+                                                   name="business_name"
+                                                   placeholder="{% trans "Store / Shop / Workshop name" %}"
+                                                   required />
+                                        </div>
+                                        <!-- Phone Number -->
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold small" for="phone_number">
+                                                {% trans "Phone Number" %} <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="tel"
+                                                   class="form-control"
+                                                   id="phone_number"
+                                                   name="phone_number"
+                                                   placeholder="05/06/07 XXXXXXXX"
+                                                   required
+                                                   pattern="(0|\+213|213)[567][0-9]{8}"
+                                                   title="{% trans "Enter a valid Algerian phone number (e.g., 05XXXXXXXX)" %}" />
+                                            <div class="form-text small text-muted">
+                                                {% trans "Supports 05/06/07, 213 or +213 formats" %}
+                                            </div>
+                                        </div>
+                                        <!-- Email -->
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold small" for="email">
+                                                {% trans "Email" %} <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="email"
+                                                   class="form-control"
+                                                   id="email"
+                                                   name="email"
+                                                   placeholder="example@domain.com"
+                                                   required
+                                                   autocomplete="email" />
+                                        </div>
+                                        <!-- Sex -->
+                                        <div class="col-md-6">
+                                            {% include "components/custom_select.html" with id="sex" name="sex" label=_("Sex") select_title=_("Select sex") choices=sex_choices %}
+
+                                        </div>
+                                        <!-- Activity Type -->
+                                        <div class="col-md-6 mb-3">
+                                            {% include "components/custom_select.html" with id="activity_type" name="activity_type" label=_("Activity Type") select_title=_("Select activity type") choices=activity_choices %}
+
+                                        </div>
+                                        <!-- Detailed Sector -->
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold small" for="detailed_sector">
+                                                {% trans "Detailed Sector" %} <span class="text-muted">({% trans "Optional" %})</span>
+                                            </label>
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="detailed_sector"
+                                                   name="detailed_sector"
+                                                   placeholder="{% trans "e.g., clothes, home appliances, electronics..." %}" />
+                                        </div>
+                                        <!-- Password -->
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold small" for="password">
+                                                {% trans "Password" %} <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="password-field">
+                                                <input type="password"
+                                                       class="form-control"
+                                                       id="password"
+                                                       name="password"
+                                                       placeholder="{% trans "Enter password" %}"
+                                                       required
+                                                       autocomplete="new-password"
+                                                       minlength="8" />
+                                                <button type="button"
+                                                        class="password-toggle"
+                                                        onclick="togglePassword('password')">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                            <div class="form-text small text-muted">
+                                                {% trans "At least 8 characters" %}
+                                            </div>
+                                        </div>
+                                        <!-- Confirm Password -->
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold small" for="confirm_password">
+                                                {% trans "Confirm Password" %} <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="password-field">
+                                                <input type="password"
+                                                       class="form-control"
+                                                       id="confirm_password"
+                                                       name="confirm_password"
+                                                       placeholder="{% trans "Re-enter password" %}"
+                                                       required
+                                                       autocomplete="new-password" />
+                                                <button type="button"
+                                                        class="password-toggle"
+                                                        onclick="togglePassword('confirm_password')">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- Registration Document -->
+                                        <div class="col-md-12">
+                                            <label class="form-label fw-semibold small" for="registration_doc">
+                                                {% trans "Registration Document" %} <span class="text-danger">*</span>
+                                            </label>
+                                            {% include "partials/custom_file_input.html" with id="registration_doc" name="registration_doc" placeholder=_("Choose a file...") required=True %}
+
+                                            <div class="form-text small text-muted">
+                                                {% trans "Upload image or PDF (max 5MB)" %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Terms Checkbox -->
+                                    <div class="mt-4">
+                                        <div class="form-check">
+                                            <input type="checkbox"
+                                                   class="form-check-input"
+                                                   id="terms"
+                                                   name="terms"
+                                                   required />
+                                            <label class="form-check-label small" for="terms">
+                                                {% trans "I agree to" %} <a href="#" class="auth-link">{% trans "Terms of Service" %}</a> {% trans "and" %} <a href="#" class="auth-link">{% trans "Privacy Policy" %}</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <button type="submit" class="btn btn-primary btn-lg mb-3 w-100">
+                                            {% trans "Create Account" %}
+                                        </button>
+                                    </div>
+                                    <div class="text-center mt-4">
+                                        <p class="mb-0">
+                                            {% trans "Already have an account?" %}
+                                            <a href="{% url 'user_auth:login' %}" class="auth-link">{% trans "Login" %}</a>
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Info -->
+            <div class="text-center mt-4 auth-footer">
+                <p class="small mb-0">
+                    {% trans "Graduation project - Kasdi Merbah University, Ouargla" %}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block extra_js %}
+    <script src="{% static 'js/auth.js' %}?v={% now "U" %}"></script>
+{% endblock extra_js %}
+{% block footer %}
+{% endblock footer %}

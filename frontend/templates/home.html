@@ -1,0 +1,287 @@
+{% extends 'index.html' %}
+{% load i18n %}
+{% load static %}
+{% load frontend_tags %}
+
+{% block body_class %}landing-page{% endblock body_class %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static "css/home.css" %}?v={% now "U" %}">
+    <style>
+        .main-content { padding: 0 !important; }
+    </style>
+{% endblock extra_css %}
+
+{% block nav %}
+    <!-- Landing Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+                <span class="fw-bold text-dark">{% website_name %}</span>
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#landingNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="landingNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link px-3 fw-bold" href="#features">{% trans "Features" %}</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 fw-bold" href="#solutions">{% trans "Solutions" %}</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 fw-bold" href="#pricing">{% trans "Pricing" %}</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    {% include 'partials/language_switcher.html' %}
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'dash:dash_home' %}" class="btn btn-primary rounded-pill px-4 fw-bold">{% trans "Dashboard" %}</a>
+                    {% else %}
+                        <a href="{% url 'user_auth:login' %}" class="btn btn-link text-dark fw-bold text-decoration-none">{% trans "Login" %}</a>
+                        <a href="{% url 'user_auth:signup' %}" class="btn btn-primary rounded-pill px-4 fw-bold">{% trans "Get Started" %}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+{% endblock nav %}
+
+{% block sidebar %}{% endblock sidebar %}
+
+{% block content %}
+    <!-- ======= Hero Section ======= -->
+    <header class="hero-wrapper">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content" data-aos="fade-right">
+                    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3 fw-bold">
+                        {% trans "Smart Operating Cycle" %} 1.0
+                    </span>
+                    <h1 class="hero-title">
+                        {% trans "Take Control of Your Business Cycle" %}
+                    </h1>
+                    <p class="hero-subtitle">
+                        {% trans "A comprehensive SaaS platform designed for Algerian SMEs to manage inventory, sales, and production with AI-powered insights." %}
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="{% url 'user_auth:signup' %}" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow">
+                            {% trans "Start Free Trial" %}
+                        </a>
+                        <a href="#features" class="btn btn-outline-primary btn-lg rounded-pill px-5 fw-bold">
+                            {% trans "Learn More" %}
+                        </a>
+                    </div>
+                    <div class="mt-5 d-flex align-items-center gap-4 text-muted">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-check-circle text-success"></i>
+                            <span class="small fw-bold">{% trans "No credit card required" %}</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-check-circle text-success"></i>
+                            <span class="small fw-bold">{% trans "Multi-language support" %}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left">
+                    <div class="hero-image-placeholder shadow-lg rounded-4 p-4 bg-white" style="border: 8px solid #f1f3f7;">
+                        <img src="{% static "icons/logo.jpg" %}" alt="SOC Logo" class="img-fluid rounded-3 mb-4 mx-auto d-block" style="max-height: 100px;">
+                        <div class="skeleton-ui">
+                            <div class="bg-light rounded-2 mb-3" style="height: 40px; width: 80%;"></div>
+                            <div class="row g-3 mb-4">
+                                <div class="col-6"><div class="bg-light rounded-2" style="height: 100px;"></div></div>
+                                <div class="col-6"><div class="bg-light rounded-2" style="height: 100px;"></div></div>
+                            </div>
+                            <div class="bg-primary bg-opacity-10 rounded-2" style="height: 150px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ======= Features Section ======= -->
+    <section id="features" class="section-features">
+        <div class="container">
+            <h2 class="section-title">{% trans "Powerful Features for Modern Business" %}</h2>
+            <p class="section-subtitle">
+                {% trans "Everything you need to scale your operations from inventory tracking to financial analytics." %}
+            </p>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-qrcode"></i></div>
+                        <h4 class="fw-bold mb-3">{% trans "QR & Barcode Scanning" %}</h4>
+                        <p class="text-muted">{% trans "Instantly add products and scan invoices with automatic data extraction using your device's camera." %}</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <h4 class="fw-bold mb-3">{% trans "Real-time Tracking" %}</h4>
+                        <p class="text-muted">{% trans "Monitor your stock levels, daily liquidity, and sales performance as they happen." %}</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                        <h4 class="fw-bold mb-3">{% trans "Smart Insights" %}</h4>
+                        <p class="text-muted">{% trans "Receive AI-powered recommendations for stock replenishment and business optimization." %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======= Solutions Section ======= -->
+    <section id="solutions" class="section-roles">
+        <div class="container">
+            <h2 class="section-title">{% trans "Tailored for Your Business Type" %}</h2>
+            <p class="section-subtitle">{% trans "Whether you're a retailer or a manufacturer, SOC adapts to your unique workflow." %}</p>
+            
+            <div class="row g-5">
+                <!-- Trader -->
+                <div class="col-lg-6" data-aos="zoom-in-right">
+                    <div class="role-card">
+                        <div class="role-header role-trader">
+                            <i class="fas fa-store fa-3x mb-3"></i>
+                            <h3 class="fw-bold">{% trans "For Traders" %}</h3>
+                            <p class="mb-0 opacity-75">{% trans "Retailers & Wholesalers" %}</p>
+                        </div>
+                        <div class="role-body">
+                            <ul class="role-list">
+                                <li><i class="fas fa-check-circle"></i> {% trans "Quick Sales Invoicing" %}</li>
+                                <li><i class="fas fa-check-circle"></i> {% trans "Cash & Credit Management" %}</li>
+                                <li><i class="fas fa-check-circle"></i> {% trans "Supplier Debt Tracking" %}</li>
+                                <li><i class="fas fa-check-circle"></i> {% trans "Daily Liquidity Overview" %}</li>
+                            </ul>
+                            <a href="{% url 'user_auth:signup' %}?type=trader" class="btn btn-outline-primary w-100 rounded-pill fw-bold py-3">
+                                {% trans "Join as Trader" %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Manufacturer -->
+                <div class="col-lg-6" data-aos="zoom-in-left">
+                    <div class="role-card">
+                        <div class="role-header role-manufacturer">
+                            <i class="fas fa-industry fa-3x mb-3"></i>
+                            <h3 class="fw-bold">{% trans "For Manufacturers" %}</h3>
+                            <p class="mb-0 opacity-75">{% trans "Production Businesses" %}</p>
+                        </div>
+                        <div class="role-body">
+                            <ul class="role-list">
+                                <li><i class="fas fa-check-circle"></i> {% trans "Raw Material Consumption" %}</li>
+                                <li><i class="fas fa-check-circle"></i> {% trans "Production Order Workflow" %}</li>
+                                <li><i class="fas fa-check-circle"></i> {% trans "Unit Cost Analytics" %}</li>
+                                <li><i class="fas fa-check-circle"></i> {% trans "Batch Tracking" %}</li>
+                            </ul>
+                            <a href="{% url 'user_auth:signup' %}?type=manufacturer" class="btn btn-outline-primary w-100 rounded-pill fw-bold py-3">
+                                {% trans "Join as Manufacturer" %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="section-pricing">
+        <div class="container">
+            <h2 class="section-title">{% trans "Simple, Transparent Pricing" %}</h2>
+            <div class="row g-4 mt-2">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="pricing-card">
+                        <h4 class="fw-bold">{% trans "Basic" %}</h4>
+                        <p class="text-muted small">{% trans "Best for small retailers" %}</p>
+                        <div class="price-tag">3,000<span> DZD / {% trans "mo" %}</span></div>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Trader features" %}</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Basic inventory" %}</li>
+                            <li class="text-muted mb-2"><i class="fas fa-times me-2"></i> {% trans "Smart alerts" %}</li>
+                        </ul>
+                        <button class="btn btn-light w-100 rounded-pill fw-bold">{% trans "Choose Plan" %}</button>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pricing-card popular shadow-sm">
+                        <span class="popular-badge">{% trans "POPULAR" %}</span>
+                        <h4 class="fw-bold">{% trans "Pro" %}</h4>
+                        <p class="text-muted small">{% trans "Advanced features for growth" %}</p>
+                        <div class="price-tag">7,000<span> DZD / {% trans "mo" %}</span></div>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Trader & Manufacturer" %}</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Smart AI Alerts" %}</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Email support" %}</li>
+                        </ul>
+                        <button class="btn btn-primary w-100 rounded-pill fw-bold">{% trans "Choose Plan" %}</button>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="pricing-card">
+                        <h4 class="fw-bold">{% trans "Enterprise" %}</h4>
+                        <p class="text-muted small">{% trans "For industrial operations" %}</p>
+                        <div class="price-tag">15,000<span> DZD / {% trans "mo" %}</span></div>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Advanced Reports" %}</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Priority Support" %}</li>
+                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Unlimited Batches" %}</li>
+                        </ul>
+                        <button class="btn btn-light w-100 rounded-pill fw-bold">{% trans "Choose Plan" %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======= CTA Section ======= -->
+    <section class="section-cta">
+        <div class="container">
+            <div class="cta-banner shadow-lg" data-aos="zoom-in">
+                <h2 class="fw-bold mb-3">{% trans "Ready to Transform Your Business?" %}</h2>
+                <p class="opacity-75 mb-5 fs-5">
+                    {% trans "Join hundreds of Algerian SMEs using SOC to optimize their operating cycle today." %}
+                </p>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="{% url 'user_auth:signup' %}" class="btn btn-light btn-lg rounded-pill px-5 fw-bold text-primary">
+                        {% trans "Get Started for Free" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block footer %}
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h4 class="fw-bold mb-4">{% website_name %}</h4>
+                    <p class="text-secondary small">
+                        {% trans "A comprehensive SaaS platform for managing operating cycles of small and medium enterprises (SMEs) in Algeria." %}
+                    </p>
+                </div>
+                <div class="col-lg-2 ms-auto">
+                    <h6 class="fw-bold mb-4">{% trans "Quick Links" %}</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-secondary text-decoration-none">{% trans "Home" %}</a></li>
+                        <li class="mb-2"><a href="#features" class="text-secondary text-decoration-none">{% trans "Features" %}</a></li>
+                        <li class="mb-2"><a href="#pricing" class="text-secondary text-decoration-none">{% trans "Pricing" %}</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h6 class="fw-bold mb-4">{% trans "Contact" %}</h6>
+                    <p class="text-secondary small mb-1"><i class="fas fa-university me-2"></i> {% trans "Kasdi Merbah University" %}</p>
+                    <p class="text-secondary small"><i class="fas fa-map-marker-alt me-2"></i> {% trans "Ouargla, Algeria" %}</p>
+                </div>
+            </div>
+            <hr class="my-5 border-secondary opacity-25">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <p class="mb-0 text-secondary small">
+                    &copy; 2026 SOC. {% trans "All rights reserved." %}
+                </p>
+                <p class="mb-0 text-secondary small">
+                    {% trans "Developed by Amal Bensherif & Soumahan Tembokto" %}
+                </p>
+            </div>
+        </div>
+    </footer>
+{% endblock footer %}
