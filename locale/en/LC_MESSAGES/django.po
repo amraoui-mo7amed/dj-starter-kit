@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-28 09:16+0100\n"
+"POT-Creation-Date: 2026-03-28 09:44+0100\n"
 "PO-Revision-Date: 2026-03-28 10:00+0100\n"
 "Last-Translator: Mohamed <mohamed@example.com>\n"
 "Language-Team: English <en@li.org>\n"
@@ -17,21 +17,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/context_processors.py:12
-msgid "StarterKit"
-msgstr ""
+#: core/context_processors.py:11
+msgid "SnapStore"
+msgstr "SnapStore"
 
-#: core/context_processors.py:14
-msgid "Modern Django Scaffolding"
-msgstr ""
+#: core/context_processors.py:13
+msgid "AI-Powered Landing Pages"
+msgstr "AI-Powered Landing Pages"
 
-#: core/context_processors.py:26
-msgid "Generic Django Starter Kit."
-msgstr ""
+#: core/context_processors.py:25
+msgid "Generate high-converting landing pages in seconds with Gemini AI."
+msgstr "Generate high-converting landing pages in seconds with Gemini AI."
 
-#: core/context_processors.py:29
-msgid "django, boilerplate, starter kit"
-msgstr ""
+#: core/context_processors.py:28
+msgid "landing page, ai, gemini, merchant, ecommerce, conversion"
+msgstr "landing page, ai, gemini, merchant, ecommerce, conversion"
 
 #: core/settings.py:127
 msgid "العربية"
@@ -881,15 +881,3 @@ msgstr "This email is already registered."
 #: user_auth/views.py:116
 msgid "Your account has been created successfully."
 msgstr "Your account has been created successfully."
-
-#~ msgid "SnapStore"
-#~ msgstr "SnapStore"
-
-#~ msgid "AI-Powered Landing Pages"
-#~ msgstr "AI-Powered Landing Pages"
-
-#~ msgid "Generate high-converting landing pages in seconds with Gemini AI."
-#~ msgstr "Generate high-converting landing pages in seconds with Gemini AI."
-
-#~ msgid "landing page, ai, gemini, merchant, ecommerce, conversion"
-#~ msgstr "landing page, ai, gemini, merchant, ecommerce, conversion"

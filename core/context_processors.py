@@ -1,6 +1,5 @@
 from django.conf import settings
-from django.utils.translation import gettext_lazy as _
-from decouple import config
+from django.utils.translation import gettext_lazy as _, get_language
 
 
 def site_settings(request):
@@ -9,33 +8,33 @@ def site_settings(request):
     """
     return {
         "site_config": {
-            "name": config("SITE_NAME", default=_("StarterKit")),
-            "ar_name": config("SITE_AR_NAME", default="ستارتر كيت"),
-            "tagline": config("SITE_TAGLINE", default=_("Modern Django Scaffolding")),
-            "logo": config("SITE_LOGO_URL", default=None),
-            "favicon": config("SITE_FAVICON_URL", default=None),
-            "contact_email": config("CONTACT_EMAIL", default="admin@example.com"),
-            "phone": config("CONTACT_PHONE", default="+000 000 000"),
+            "name": _("SnapStore"),
+            "ar_name": "سناب ستور",  # Keep for title fallback logic
+            "tagline": _("AI-Powered Landing Pages"),
+            "logo": None,  # Add custom logo path here
+            "favicon": None,  # Add custom favicon path here
+            "contact_email": "info@snapstore.com",
+            "phone": "+213 555 000 000",
             "social": {
-                "facebook": config("SOCIAL_FB", default="#"),
-                "twitter": config("SOCIAL_TWITTER", default="#"),
-                "instagram": config("SOCIAL_INSTA", default="#"),
+                "facebook": "https://facebook.com/snapstore",
+                "twitter": "https://twitter.com/snapstore",
+                "instagram": "https://instagram.com/snapstore",
             },
             "seo": {
-                "description": config(
-                    "SEO_DESCRIPTION", default=_("Generic Django Starter Kit.")
+                "description": _(
+                    _("Generate high-converting landing pages in seconds with Gemini AI.")
                 ),
-                "keywords": config(
-                    "SEO_KEYWORDS", default=_("django, boilerplate, starter kit")
+                "keywords": _(
+                    _("landing page, ai, gemini, merchant, ecommerce, conversion")
                 ),
             },
             "branding": {
-                "primary_color": config("PRIMARY_COLOR", default="#0d6efd"),
-                "secondary_color": config("SECONDARY_COLOR", default="#6c757d"),
-                "accent_color": config("ACCENT_COLOR", default="#ffc107"),
-                "success_color": config("SUCCESS_COLOR", default="#198754"),
-                "danger_color": config("DANGER_COLOR", default="#dc3545"),
-                "dark_color": config("DARK_COLOR", default="#212529"),
+                "primary_color": "#0d6efd",
+                "secondary_color": "#6c757d",
+                "accent_color": "#ffc107",
+                "success_color": "#198754",
+                "danger_color": "#dc3545",
+                "dark_color": "#212529",
                 "light_color": "#f8f9fa",
             },
         }
