@@ -28,16 +28,20 @@ class Command(BaseCommand):
         en_first_names = ["John", "Sarah", "Alex", "Emma", "David", "Sophia", "Robert"]
         en_last_names = ["Smith", "Jones", "Williams", "Brown", "Miller", "Davis"]
 
-        ar_business_types = ["محل", "مؤسسة", "ورشة", "متجر"]
-        en_business_types = ["Store", "Enterprise", "Workshop", "Shop"]
+        bios = [
+            "Lover of technology and innovation.",
+            "Always exploring new horizons.",
+            "Developer by day, gamer by night.",
+            "Passionate about clean code and design.",
+            "Building the future, one line at a time.",
+        ]
 
-        sectors = [
-            "Electronics",
-            "Clothes",
-            "Food",
-            "Furniture",
-            "Hardware",
-            "Construction",
+        addresses = [
+            "Algiers, Algeria",
+            "London, UK",
+            "New York, USA",
+            "Paris, France",
+            "Tokyo, Japan",
         ]
 
         self.stdout.write(f"Seeding {count} users...")
@@ -49,13 +53,9 @@ class Command(BaseCommand):
                 if lang == "ar":
                     first = random.choice(ar_first_names)
                     last = random.choice(ar_last_names)
-                    b_type = random.choice(ar_business_types)
-                    business_name = f"{b_type} {first} {last}"
                 else:
                     first = random.choice(en_first_names)
                     last = random.choice(en_last_names)
-                    b_type = random.choice(en_business_types)
-                    business_name = f"{first}'s {b_type}"
 
                 # Generate a unique username
                 base_username = first.lower().replace(" ", "")
@@ -74,17 +74,22 @@ class Command(BaseCommand):
                 )
 
                 sex = random.choice(UserProfile.sexChoices.values)
-                activity = random.choice(UserProfile.activityTypeChoices.values)
                 approved = random.choice([True, False])
-                phone = f"0{random.choice(['5', '6', '7'])}{random.randint(10000000, 99999999)}"
+                phone = f"+123{random.randint(10000000, 99999999)}"
+
+                # Randomized birthday (18-60 years ago)
+                year = 2024 - random.randint(18, 60)
+                month = random.randint(1, 12)
+                day = random.randint(1, 28)
+                birth_date = f"{year}-{month:02d}-{day:02d}"
 
                 UserProfile.objects.create(
                     user=user,
-                    business_name=business_name,
                     phone_number=phone,
                     sex=sex,
-                    activity_type=activity,
-                    detailed_sector=random.choice(sectors),
+                    bio=random.choice(bios),
+                    birth_date=birth_date,
+                    address=random.choice(addresses),
                     is_approved=approved,
                 )
                 created_count += 1

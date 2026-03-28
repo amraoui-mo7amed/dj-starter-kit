@@ -7,6 +7,8 @@ A robust, centralized, and highly customizable Django boilerplate designed for r
 - **Centralized Configuration**: Manage site name, logo, contact details, and SEO metadata from a single Python file (`core/context_processors.py`).
 - **Dynamic Branding**: UI colors are driven by CSS variables injected from the backend. Change your brand colors in one place, and the entire site (Dashboard & Frontend) updates instantly.
 - **Full i18n & RTL Support**: Built-in support for Arabic (RTL) and English (LTR) with automatic layout switching and translatable metadata.
+- **Dynamic Dashboard Menu**: Manage navigation links and Role-Based Access Control (RBAC) via `dashboard/context_processors.py`.
+- **SVG Logo System**: Includes a scalable SVG component fallback for the logo to ensure a clean UI even without uploaded assets.
 - **Modern Component Library**: Ready-to-use generic components including:
   - Custom brand-aware Select tags.
   - Modern File Input widgets.
@@ -41,7 +43,13 @@ A robust, centralized, and highly customizable Django boilerplate designed for r
    python manage.py createsuperuser
    ```
 
-4. **Run Server**:
+4. **Seed Database (Optional)**:
+   Generate randomized user profiles for development:
+   ```bash
+   python manage.py seed_users 10
+   ```
+
+5. **Run Server**:
    ```bash
    python manage.py runserver
    ```
@@ -62,10 +70,13 @@ Edit `core/context_processors.py` to change global settings:
 }
 ```
 
-### 2. Styling
+### 2. Dashboard Navigation & RBAC
+Manage menu items in `dashboard/context_processors.py`. Use the `admin_only` flag to restrict links to superusers.
+
+### 3. Styling
 All stylesheets reference the original variables in `frontend/static/css/index.css`. **Never use hardcoded hex colors** in new CSS files; always reference `var(--brand-primary)`, `var(--brand-secondary)`, etc.
 
-### 3. Adding Translations
+### 4. Adding Translations
 Run the standard Django translation commands to update the locale files:
 ```bash
 python manage.py makemessages -l ar
