@@ -15,7 +15,7 @@ body.landing-page #sidebar {
 
 /* Variables & Global */
 :root {
-    --hero-bg: #f8fbff;
+    --hero-bg: var(--brand-light);
     --section-padding: 100px 0;
 }
 
@@ -23,12 +23,12 @@ body.landing-page #sidebar {
 .navbar-landing .navbar-brand {
     font-size: 24px;
     font-weight: 800;
-    color: var(--soc-blue-dark);
+    color: var(--brand-primary);
 }
 
 /* Hero Section */
 .hero-wrapper {
-    background: linear-gradient(135deg, #ffffff 0%, #eef5ff 100%);
+    background: linear-gradient(135deg, #ffffff 0%, var(--brand-light) 100%);
     padding: 120px 0 80px;
     position: relative;
     overflow: hidden;
@@ -41,7 +41,7 @@ body.landing-page #sidebar {
     right: -5%;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, var(--soc-blue-light) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--brand-secondary) 0%, transparent 70%);
     opacity: 0.15;
     z-index: 0;
 }
@@ -54,14 +54,14 @@ body.landing-page #sidebar {
 .hero-title {
     font-size: 3.5rem;
     font-weight: 800;
-    color: var(--soc-blue-dark);
+    color: var(--brand-primary);
     line-height: 1.2;
     margin-bottom: 1.5rem;
 }
 
 .hero-subtitle {
     font-size: 1.25rem;
-    color: #4a5568;
+    color: var(--text-main);
     margin-bottom: 2.5rem;
     max-width: 600px;
 }
@@ -75,7 +75,7 @@ body.landing-page #sidebar {
 .section-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--soc-blue-dark);
+    color: var(--brand-primary);
     margin-bottom: 1rem;
     text-align: center;
 }
@@ -100,8 +100,8 @@ body.landing-page #sidebar {
 
 .feature-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(42, 75, 140, 0.08);
-    border-color: var(--soc-blue-light);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+    border-color: var(--brand-secondary);
 }
 
 .feature-icon {
@@ -113,8 +113,8 @@ body.landing-page #sidebar {
     border-radius: 16px;
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
-    background: rgba(42, 75, 140, 0.05);
-    color: var(--soc-blue-dark);
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--brand-primary);
 }
 
 /* User Roles Section */
@@ -138,8 +138,8 @@ body.landing-page #sidebar {
     color: #fff;
 }
 
-.role-trader { background: var(--soc-blue-dark); }
-.role-manufacturer { background: var(--soc-blue-medium); }
+.role-trader { background: var(--brand-primary); }
+.role-manufacturer { background: var(--brand-secondary); }
 
 .role-body {
     padding: 40px;
@@ -161,7 +161,7 @@ body.landing-page #sidebar {
 }
 
 .role-list li i {
-    color: #28a745;
+    color: var(--brand-success);
 }
 
 /* Pricing Section */
@@ -181,14 +181,14 @@ body.landing-page #sidebar {
 }
 
 .pricing-card.popular {
-    border-color: var(--soc-blue-medium);
+    border-color: var(--brand-secondary);
     background: #fbfdff;
 }
 
 .popular-badge {
     position: absolute;
     top: 20px;
-    background: var(--soc-blue-medium);
+    background: var(--brand-secondary);
     color: #fff;
     padding: 4px 12px;
     border-radius: 20px;
@@ -207,7 +207,7 @@ body.landing-page #sidebar {
 .price-tag {
     font-size: 2.5rem;
     font-weight: 800;
-    color: var(--soc-blue-dark);
+    color: var(--brand-primary);
     margin: 1.5rem 0;
 }
 
@@ -223,7 +223,7 @@ body.landing-page #sidebar {
 }
 
 .cta-banner {
-    background: linear-gradient(to right, var(--soc-blue-dark), var(--soc-blue-medium));
+    background: linear-gradient(to right, var(--brand-primary), var(--brand-secondary));
     border-radius: 40px;
     padding: 60px;
     color: #fff;

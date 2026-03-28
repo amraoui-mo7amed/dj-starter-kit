@@ -1,5 +1,5 @@
 /*==========================
-SOC Authentication Pages - Common Styles
+Starter Kit Authentication Pages - Common Styles
 ==========================*/
 
 /* Uses CSS variables from frontend/static/css/index.css */
@@ -13,7 +13,7 @@ SOC Authentication Pages - Common Styles
 }
 
 .auth-page-bg {
-    background: linear-gradient(135deg, var(--soc-blue-dark) 0%, var(--soc-blue-medium) 100%);
+    background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
 }
 
 /* Card Styling */
@@ -25,7 +25,7 @@ SOC Authentication Pages - Common Styles
 
 /* Left Side Branding */
 .auth-branding {
-    background: linear-gradient(180deg, var(--soc-blue-dark) 0%, #1e3a6d 100%);
+    background: linear-gradient(180deg, var(--brand-primary) 0%, var(--brand-dark) 100%);
     min-height: 100%;
 }
 
@@ -34,7 +34,7 @@ SOC Authentication Pages - Common Styles
 }
 
 .brand-logo-icon {
-    color: var(--soc-blue-light);
+    color: var(--brand-light);
 }
 
 .brand-text {
@@ -54,45 +54,45 @@ SOC Authentication Pages - Common Styles
 }
 
 .feature-icon {
-    color: var(--soc-blue-light);
+    color: var(--brand-light);
     width: 24px;
     text-align: center;
 }
 
 /* Right Side Form */
 .auth-form-section {
-    background: var(--soc-white-accent);
+    background: var(--white-accent);
 }
 
 .form-title {
-    color: var(--soc-blue-dark);
+    color: var(--brand-primary);
 }
 
 /* Form Controls */
 .form-label {
-    color: var(--soc-text-main);
+    color: var(--text-main);
 }
 
 .form-label i {
-    color: var(--soc-blue-medium);
+    color: var(--brand-secondary);
 }
 
 .form-control,
 .form-select {
-    border-color: var(--soc-bg-canvas);
+    border-color: var(--border-color);
     border-radius: 12px;
     border-width: 2px;
 }
 
 .form-control:focus,
 .form-select:focus {
-    border-color: var(--soc-blue-medium);
-    box-shadow: 0 0 0 0.2rem rgba(42, 75, 140, 0.25);
+    border-color: var(--brand-secondary);
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.05);
 }
 
 /* Input Group */
 .input-group-text {
-    border-color: var(--soc-bg-canvas);
+    border-color: var(--border-color);
     border-width: 2px;
     border-radius: 0 12px 12px 0;
 }
@@ -103,7 +103,7 @@ SOC Authentication Pages - Common Styles
 
 /* Password Toggle Button */
 .password-toggle {
-    color: var(--soc-blue-medium);
+    color: var(--brand-secondary);
     background: none;
     border: none;
     position: absolute;
@@ -116,7 +116,7 @@ SOC Authentication Pages - Common Styles
 }
 
 .password-toggle:hover {
-    color: var(--soc-blue-dark);
+    color: var(--brand-primary);
 }
 
 .password-field {
@@ -125,33 +125,34 @@ SOC Authentication Pages - Common Styles
 
 /* Checkbox Styling */
 .form-check-input {
-    border-color: var(--soc-blue-medium);
+    border-color: var(--brand-secondary);
 }
 
 .form-check-input:checked {
-    background-color: var(--soc-blue-dark);
-    border-color: var(--soc-blue-dark);
+    background-color: var(--brand-primary);
+    border-color: var(--brand-primary);
 }
 
 /* Submit Button */
 .submit-btn {
-    background-color: var(--soc-blue-dark);
-    color: var(--soc-white-accent);
+    background-color: var(--brand-primary);
+    color: var(--white-accent);
     border-radius: 12px;
     border: none;
 }
 
 /* Links */
 .auth-link {
-    color: var(--soc-blue-dark);
+    color: var(--brand-primary);
     text-decoration: none;
     font-weight: 600;
 }
 
 .auth-link:hover {
-    color: var(--soc-blue-medium);
+    color: var(--brand-secondary);
     text-decoration: underline;
 }
+
 
 /* Footer */
 .auth-footer {

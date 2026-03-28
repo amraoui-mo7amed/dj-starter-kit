@@ -22,17 +22,18 @@
 
 /* Card colors */
 .card-revenue {
-    background: linear-gradient(135deg, #4a90e2, #357ab8);
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
 }
 
 .card-items {
-    background: linear-gradient(135deg, #28a745, #1e7e34);
+    background: linear-gradient(135deg, var(--brand-success), #1e7e34);
 }
 
 .card-count {
-    background: linear-gradient(135deg, #ffc107, #e0a800);
-    color: #212529;
+    background: linear-gradient(135deg, var(--brand-accent), #e0a800);
+    color: var(--brand-dark);
 }
+
 
 /* Icon inside card */
 .card i {

@@ -10,8 +10,30 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="{{ site_config.seo.description }}">
+        <meta name="keywords" content="{{ site_config.seo.keywords }}">
         <link rel="icon" type="image/png" href="{% static 'icons/logo.jpg' %}">
-        <title>{% website_name %}</title>
+        <title>
+            {% if IS_RTL %}
+                {{ site_config.ar_name }}
+            {% else %}
+                {{ site_config.name }}
+            {% endif %}
+            {% block title %}
+            {% endblock title %}
+        </title>
+
+        <style>
+            :root {
+                --primary-color: {{ site_config.branding.primary_color }};
+                --secondary-color: {{ site_config.branding.secondary_color }};
+                --accent-color: {{ site_config.branding.accent_color }};
+                --success-color: {{ site_config.branding.success_color }};
+                --danger-color: {{ site_config.branding.danger_color }};
+                --dark-color: {{ site_config.branding.dark_color }};
+                --light-color: {{ site_config.branding.light_color }};
+            }
+        </style>
         <!-- Bootstrap CSS -->
         {% if IS_RTL %}
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css"
@@ -46,9 +68,9 @@
                             id="sidebarToggle">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/">
                         <i class="fas fa-cube me-2"></i>
-                        SOC
+                        {% if IS_RTL %}{{ site_config.ar_name }}{% else %}{{ site_config.name }}{% endif %}
                     </a>
                     <button class="navbar-toggler"
                             type="button"
@@ -59,16 +81,16 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i> الرئيسية</a>
+                                <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i> {% trans "Home" %}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fas fa-boxes me-1"></i> المنتجات</a>
+                                <a class="nav-link" href="#"><i class="fas fa-boxes me-1"></i> {% trans "Products" %}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fas fa-chart-bar me-1"></i> التقارير</a>
+                                <a class="nav-link" href="#"><i class="fas fa-chart-bar me-1"></i> {% trans "Reports" %}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fas fa-cog me-1"></i> الإعدادات</a>
+                                <a class="nav-link" href="#"><i class="fas fa-cog me-1"></i> {% trans "Settings" %}</a>
                             </li>
                         </ul>
                     </div>
@@ -81,42 +103,42 @@
             <!-- Sidebar -->
             <div class="sidebar p-3 col-lg-2 d-none d-lg-block" id="sidebar">
                 <h6 class="text-muted mb-3">
-                    القائمة الرئيسية
+                    {% trans "Main Menu" %}
                 </h6>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
-                            <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                            <i class="fas fa-tachometer-alt me-2"></i>{% trans "Dashboard" %}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <i class="fas fa-box me-2"></i>المخزون
+                            <i class="fas fa-box me-2"></i>{% trans "Inventory" %}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <i class="fas fa-file-invoice me-2"></i>فواتير المبيعات
+                            <i class="fas fa-file-invoice me-2"></i>{% trans "Sales Invoices" %}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <i class="fas fa-shopping-cart me-2"></i>فواتير المشتريات
+                            <i class="fas fa-shopping-cart me-2"></i>{% trans "Purchase Invoices" %}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <i class="fas fa-users me-2"></i>العملاء والموردين
+                            <i class="fas fa-users me-2"></i>{% trans "Customers & Suppliers" %}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <i class="fas fa-chart-bar me-2"></i>التقارير
+                            <i class="fas fa-chart-bar me-2"></i>{% trans "Reports" %}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <i class="fas fa-bell me-2"></i>التنبيهات
+                            <i class="fas fa-bell me-2"></i>{% trans "Notifications" %}
                         </a>
                     </li>
                 </ul>
@@ -132,10 +154,12 @@
             <footer class="bg-white py-4 mt-5 border-top">
                 <div class="container text-center">
                     <p class="mb-0">
-                        © 2024 SOC - دورة التشغيل الذكية
+                        © {% now "Y" %} {% if IS_RTL %}{{ site_config.ar_name }}{% else %}{{ site_config.name }}{% endif %}
                     </p>
                     <p class="mb-0 small">
-                        مشروع تخرج - جامعة القاضي مرباح، ورقلة
+                        {% if site_config.contact_email %}
+                            {{ site_config.contact_email }}
+                        {% endif %}
                     </p>
                 </div>
             </footer>
