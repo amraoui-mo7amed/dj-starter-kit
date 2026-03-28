@@ -6,81 +6,106 @@ A robust, centralized, and highly customizable Django boilerplate designed for r
 
 - **Centralized Configuration**: Manage site name, logo, contact details, and SEO metadata from a single Python file (`core/context_processors.py`).
 - **Dynamic Branding**: UI colors are driven by CSS variables injected from the backend. Change your brand colors in one place, and the entire site (Dashboard & Frontend) updates instantly.
-- **Full i18n & RTL Support**: Built-in support for Arabic (RTL), English (LTR), and French (LTR) with automatic layout switching and translatable metadata.
-- **Dynamic Dashboard Menu**: Manage navigation links and Role-Based Access Control (RBAC) via `dashboard/context_processors.py`.
-- **SVG Logo System**: Includes a scalable SVG component fallback for the logo to ensure a clean UI even without uploaded assets.
-- **Modern Component Library**: Ready-to-use generic components including custom Select tags, File Input widgets, and specialized Pagination.
-- **AJAX-First Pattern**: Guidelines and utilities for standardizing AJAX updates and deletes with translatable SweetAlert2 feedback.
+- **Full i18n & RTL Support**: Built-in support for Arabic (RTL), English (LTR), and French (LTR) with automatic layout switching.
+- **Modern Component Library**: Ready-to-use generic components: Select tags, File Inputs, and specialized Pagination.
+- **AJAX-First Pattern**: Standardized form handling with loading states and translatable SweetAlert2/error list feedback.
 
 ## Tech Stack
 
 - **Backend**: Django 5.2+
-- **Environment**: python-decouple (for security settings)
-- **Styling**: Bootstrap 5.3 + Custom CSS Variables
-- **Icons**: FontAwesome 5
-- **Animations**: AOS (Animate On Scroll)
-- **Real-time**: Django EventStream + SSE support
+- **Environment**: python-decouple
+- **Styling**: Bootstrap 5.3 + Variable-driven CSS
+- **Real-time**: Django EventStream + SSE
 
 ## Getting Started
 
-1. **Clone & Install**:
-   ```bash
-   git clone https://github.com/amraoui-mo7amed/dj-starter-kit
-   pip install -r requirements.txt
-   ```
+### 1. Clone & Install
+```bash
+git clone https://github.com/amraoui-mo7amed/dj-starter-kit
+pip install -r requirements.txt
+```
 
-2. **Configure Environment**:
-   Copy `.env.example` to `.env` and set your `APP_SECRET` and database settings.
-   ```bash
-   cp .env.example .env
-   ```
+### 2. Configure Environment
+Copy `.env.example` to `.env` and set your variables.
+```bash
+cp .env.example .env
+```
 
-3. **Database Setup**:
-   ```bash
-   python manage.py migrate
-   python manage.py createsuperuser
-   ```
+**Generate a Safe Secret Key:**
+Run this command to generate a secure key for `APP_SECRET`:
+```bash
+python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+```
 
-4. **Seed Database (Optional)**:
-   Generate randomized generic user profiles for development:
-   ```bash
-   python manage.py seed_users 10
-   ```
+| Variable | Description |
+|----------|-------------|
+| `APP_SECRET` | Your Django secret key (generate a unique one for production). |
+| `APP_ENV` | Set to `development` for local work or `production` to disable debug mode. |
+| `APP_ALLOWED_HOSTS` | Comma-separated list of domains (e.g., `localhost,127.0.0.1,yourdomain.com`). |
+| `EMAIL_*` | SMTP settings for account activation and notification emails. |
 
-5. **Run Server**:
-   ```bash
-   python manage.py runserver
-   ```
+### 3. Database Setup
+```bash
+python manage.py migrate
+```
+
+### 4. Create Superuser (Admin)
+To access the dashboard management features and Django admin:
+```bash
+python manage.py createsuperuser
+```
+
+### 5. Seed Database (Optional)
+Generate randomized generic user profiles for development:
+```bash
+python manage.py seed_users 10
+```
+
+## Development Guide
+
+### Creating an AJAX-Compatible View
+The project uses a centralized JavaScript handler for forms with the `.form` class. To make a view compatible with the `errorList.html` partial and SweetAlert feedback, return a `JsonResponse` as follows:
+
+```python
+from django.http import JsonResponse
+from django.utils.translation import gettext_lazy as _
+
+def your_view(request):
+    if request.method == "POST":
+        # 1. Validation Logic
+        errors = []
+        if not request.POST.get("name"):
+            errors.append(_("Name is required."))
+        
+        if errors:
+            return JsonResponse({"success": False, "errors": errors})
+
+        # 2. Processing Logic
+        # ... your code ...
+
+        # 3. Success Response
+        return JsonResponse({
+            "success": True,
+            "message": _("Action completed successfully!"),
+            "redirect_url": "/dashboard/success/" # Optional redirect
+        })
+```
+
+**Template Usage:**
+```html
+{% include "partials/errorList.html" with form_id="yourFormId" %}
+<form id="yourFormId" class="form" method="post">
+    ...
+</form>
+```
 
 ## Customization
 
-### 1. Project Identity & Branding
-All global settings are hardcoded for simplicity in `core/context_processors.py`. Edit the `site_config` dictionary to change:
-- **Site Names**: `name` (English/Generic) and `ar_name` (Arabic).
-- **Branding**: Primary, Secondary, and functional colors (Hex codes).
-- **SEO**: Global meta descriptions and keywords.
-- **Contact**: Email, Phone, and Social links.
+### 1. Project Identity
+Edit the `site_config` dictionary in `core/context_processors.py` to change branding, SEO, and contact details globally.
 
 ### 2. Dashboard Navigation & RBAC
 Manage menu items in `dashboard/context_processors.py`. Use the `admin_only: True` flag to restrict specific links to superusers.
 
-### 3. Styling
-All stylesheets reference the original variables in `frontend/static/css/index.css`. **Never use hardcoded hex colors** in new CSS files; always reference `var(--brand-primary)`, `var(--brand-secondary)`, etc.
-
-### 4. Internationalization
-Run these commands to update or add translations:
-```bash
-python manage.py makemessages -l ar -l fr
-python manage.py compilemessages
-```
-
-## Development Guidelines
-
-- **Components**: Always use `dashboard/templates/components/` for selects and pagination.
-- **Forms**: Add the `.form` class and use `partials/errorList.html` for validation errors.
-- **Logic**: Helper functions belong in `<app>/utils.py`.
-- **UI Actions**: Always use SweetAlert for confirmation and AJAX for object updates/deletions.
-
 ## License
-
 This is a generic boilerplate for future projects. Customize and extend as needed.
