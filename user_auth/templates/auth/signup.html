@@ -27,16 +27,17 @@
                             </div>
                             <div class="text-center mb-4">
                                 <div class="brand-logo mb-3">
-                                    <img src="{% static 'icons/logo.jpg' %}"
-                                         alt="{{ site_config.name }} Logo"
-                                         class="rounded shadow-sm"
-                                         style="width: 70px;" />
+                                    {% if site_config.logo %}
+                                        <img src="{{ site_config.logo }}" alt="{{ site_config.name }} Logo" class="rounded shadow-sm" style="width: 70px;" />
+                                    {% else %}
+                                        {% include "components/logo.html" with size=70 icon_size=35 %}
+                                    {% endif %}
                                 </div>
                                 <h3 class="fw-bold mb-2 form-title">
                                     {% trans "Create Account" %}
                                 </h3>
                                 <p class="text-muted">
-                                    {% blocktrans with site_name=site_config.name %}Register your business and start your journey with {{ site_name }}{% endblocktrans %}
+                                    {% blocktrans with site_name=site_config.name %}Join the community and start your journey with {{ site_name }}{% endblocktrans %}
                                 </p>
                             </div>
                             {% include "partials/errorList.html" with form_id="signupForm" %}
@@ -74,35 +75,6 @@
                                                required
                                                autocomplete="family-name" />
                                     </div>
-                                    <!-- Business Name -->
-                                    <div class="col-md-6">
-                                        <label class="form-label fw-semibold small" for="business_name">
-                                            {% trans "Business Name" %} <span class="text-danger">*</span>
-                                        </label>
-                                        <input type="text"
-                                               class="form-control"
-                                               id="business_name"
-                                               name="business_name"
-                                               placeholder="{% trans "Store / Shop / Workshop name" %}"
-                                               required />
-                                    </div>
-                                    <!-- Phone Number -->
-                                    <div class="col-md-6">
-                                        <label class="form-label fw-semibold small" for="phone_number">
-                                            {% trans "Phone Number" %} <span class="text-danger">*</span>
-                                        </label>
-                                        <input type="tel"
-                                               class="form-control"
-                                               id="phone_number"
-                                               name="phone_number"
-                                               placeholder="05/06/07 XXXXXXXX"
-                                               required
-                                               pattern="(0|\+213|213)[567][0-9]{8}"
-                                               title="{% trans "Enter a valid Algerian phone number (e.g., 05XXXXXXXX)" %}" />
-                                        <div class="form-text small text-muted">
-                                            {% trans "Supports 05/06/07, 213 or +213 formats" %}
-                                        </div>
-                                    </div>
                                     <!-- Email -->
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold small" for="email">
@@ -116,26 +88,30 @@
                                                required
                                                autocomplete="email" />
                                     </div>
+                                    <!-- Phone Number -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold small" for="phone_number">
+                                            {% trans "Phone Number" %}
+                                        </label>
+                                        <input type="tel"
+                                               class="form-control"
+                                               id="phone_number"
+                                               name="phone_number"
+                                               placeholder="+123 456 789" />
+                                    </div>
+                                    <!-- Birth Date -->
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold small" for="birth_date">
+                                            {% trans "Birth Date" %}
+                                        </label>
+                                        <input type="date"
+                                               class="form-control"
+                                               id="birth_date"
+                                               name="birth_date" />
+                                    </div>
                                     <!-- Sex -->
                                     <div class="col-md-6">
                                         {% include "components/custom_select.html" with id="sex" name="sex" label=_("Sex") select_title=_("Select sex") choices=sex_choices %}
-
-                                    </div>
-                                    <!-- Activity Type -->
-                                    <div class="col-md-6 mb-3">
-                                        {% include "components/custom_select.html" with id="activity_type" name="activity_type" label=_("Activity Type") select_title=_("Select activity type") choices=activity_choices %}
-
-                                    </div>
-                                    <!-- Detailed Sector -->
-                                    <div class="col-md-6">
-                                        <label class="form-label fw-semibold small" for="detailed_sector">
-                                            {% trans "Detailed Sector" %} <span class="text-muted">({% trans "Optional" %})</span>
-                                        </label>
-                                        <input type="text"
-                                               class="form-control"
-                                               id="detailed_sector"
-                                               name="detailed_sector"
-                                               placeholder="{% trans "e.g., clothes, home appliances, electronics..." %}" />
                                     </div>
                                     <!-- Password -->
                                     <div class="col-md-6">
@@ -156,9 +132,6 @@
                                                     onclick="togglePassword('password')">
                                                 <i class="fas fa-eye"></i>
                                             </button>
-                                        </div>
-                                        <div class="form-text small text-muted">
-                                            {% trans "At least 8 characters" %}
                                         </div>
                                     </div>
                                     <!-- Confirm Password -->
@@ -181,18 +154,10 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <!-- Registration Document -->
-                                    <div class="col-md-12">
-                                        <label class="form-label fw-semibold small" for="registration_doc">
-                                            {% trans "Registration Document" %} <span class="text-danger">*</span>
-                                        </label>
-                                        {% include "partials/custom_file_input.html" with id="registration_doc" name="registration_doc" placeholder=_("Choose a file...") required=True %}
-
-                                        <div class="form-text small text-muted">
-                                            {% trans "Upload image or PDF (max 5MB)" %}
-                                        </div>
-                                    </div>
                                 </div>
+
+
+
                                 <!-- Terms Checkbox -->
                                 <div class="mt-4">
                                     <div class="form-check">

@@ -31,9 +31,13 @@
         {% block sidebar %}
             <aside id="sidebar" class="sidebar">
                 <div class="sidebar-header">
-                    <img src="{% static 'icons/logo.jpg' %}"
-                         alt="{{ site_config.name }} Logo"
-                         class="sidebar-logo me-2" />
+                    {% if site_config.logo %}
+                        <img src="{{ site_config.logo }}" alt="{{ site_config.name }} Logo" class="sidebar-logo me-2" />
+                    {% else %}
+                        <div class="me-2">
+                            {% include "components/logo.html" with size=40 icon_size=24 %}
+                        </div>
+                    {% endif %}
                     <div class="sidebar-brand-text">
                         <h5 class="text-white fw-bold mb-0 text-truncate">
                             {% if IS_RTL %}

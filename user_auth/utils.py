@@ -5,15 +5,17 @@ from django.db import transaction
 from django.contrib.auth.models import User
 
 
-def create_user_account(user_data, profile_data, registration_doc):
+def create_user_account(user_data, profile_data, profile_picture):
     """
     Helper to create a User and UserProfile within a transaction.
     """
     from .models import UserProfile
 
-    username = user_data["last_name"]
+    # Use email as username prefix or fallback to last_name
+    base_username = user_data["email"].split("@")[0]
+    username = base_username
     if User.objects.filter(username=username).exists():
-        username = f"{username}_{int(time.time())}"
+        username = f"{base_username}_{int(time.time())}"
 
     with transaction.atomic():
         user = User.objects.create_user(
@@ -26,20 +28,18 @@ def create_user_account(user_data, profile_data, registration_doc):
 
         UserProfile.objects.create(
             user=user,
-            business_name=profile_data["business_name"],
-            phone_number=profile_data["phone_number"],
-            sex=profile_data["sex"],
-            activity_type=profile_data["activity_type"],
-            detailed_sector=profile_data.get("detailed_sector"),
-            registration_doc=registration_doc,
+            profile_picture=profile_picture,
+            phone_number=profile_data.get("phone_number", ""),
+            sex=profile_data.get("sex"),
+            birth_date=profile_data.get("birth_date"),
         )
     return user
 
 
 def user_profile_upload_path(instance, filename):
     ext = filename.split(".")[-1]
-    filename = f"registration_doc_{instance.user.id}.{ext}"
-    return os.path.join("registration_docs/", filename)
+    filename = f"user_{instance.user.id}_profile.{ext}"
+    return os.path.join("profile_pictures/", filename)
 
 
 def validate_algerian_phone(phone):

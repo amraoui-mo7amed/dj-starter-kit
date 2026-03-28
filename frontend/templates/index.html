@@ -74,13 +74,15 @@
                             id="sidebarToggle">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="/">
-                        <i class="fas fa-cube me-2"></i>
-                        {% if IS_RTL %}
-                            {{ site_config.ar_name }}
+                    <a class="navbar-brand d-flex align-items-center" href="/">
+                        {% if site_config.logo %}
+                            <img src="{{ site_config.logo }}" alt="Logo" style="height: 30px;" class="me-2 rounded">
                         {% else %}
-                            {{ site_config.name }}
+                            <div class="me-2">
+                                {% include "components/logo.html" with size=32 icon_size=18 %}
+                            </div>
                         {% endif %}
+                        <span class="ms-1">{% if IS_RTL %}{{ site_config.ar_name }}{% else %}{{ site_config.name }}{% endif %}</span>
                     </a>
                     <button class="navbar-toggler"
                             type="button"

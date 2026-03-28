@@ -28,10 +28,11 @@
                             </div>
                             <div class="text-center mb-4">
                                 <div class="brand-logo mb-3">
-                                    <img src="{% static 'icons/logo.jpg' %}"
-                                         alt="{{ site_config.name }} Logo"
-                                         class="rounded shadow-sm"
-                                         style="width: 80px;" />
+                                    {% if site_config.logo %}
+                                        <img src="{{ site_config.logo }}" alt="{{ site_config.name }} Logo" class="rounded shadow-sm" style="width: 80px;" />
+                                    {% else %}
+                                        {% include "components/logo.html" with size=80 icon_size=40 %}
+                                    {% endif %}
                                 </div>
                                 <h3 class="fw-bold mb-2 form-title">
                                     {% if IS_RTL %}{{ site_config.ar_name }}{% else %}{{ site_config.name }}{% endif %}

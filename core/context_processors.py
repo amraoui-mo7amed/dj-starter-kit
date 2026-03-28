@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
+
 def site_settings(request):
     """
     Returns global site configuration and branding details.
@@ -10,6 +11,8 @@ def site_settings(request):
             "name": _("SnapStore"),
             "ar_name": "سناب ستور",
             "tagline": _("AI-Powered Landing Pages"),
+            "logo": None,  # Add custom logo path here
+            "favicon": None,  # Add custom favicon path here
             "contact_email": "info@snapstore.com",
             "phone": "+213 555 000 000",
             "social": {
@@ -18,8 +21,12 @@ def site_settings(request):
                 "instagram": "https://instagram.com/snapstore",
             },
             "seo": {
-                "description": _("Generate high-converting landing pages in seconds with Gemini AI."),
-                "keywords": _("landing page, ai, gemini, merchant, ecommerce, conversion"),
+                "description": _(
+                    "Generate high-converting landing pages in seconds with Gemini AI."
+                ),
+                "keywords": _(
+                    "landing page, ai, gemini, merchant, ecommerce, conversion"
+                ),
             },
             "branding": {
                 "primary_color": "#0d6efd",
@@ -29,8 +36,6 @@ def site_settings(request):
                 "danger_color": "#dc3545",
                 "dark_color": "#212529",
                 "light_color": "#f8f9fa",
-            }
+            },
         }
     }
-
-    

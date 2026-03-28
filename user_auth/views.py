@@ -9,7 +9,6 @@ from .models import UserProfile
 from .utils import (
     create_user_account,
     user_profile_upload_path,
-    validate_algerian_phone,
 )
 
 
@@ -66,12 +65,9 @@ def signup_view(request):
         email = request.POST.get("email")
         password = request.POST.get("password")
         confirm_password = request.POST.get("confirm_password")
-        business_name = request.POST.get("business_name")
-        phone_number = request.POST.get("phone_number")
+        phone_number = request.POST.get("phone_number", "")
         sex = request.POST.get("sex")
-        activity_type = request.POST.get("activity_type")
-        detailed_sector = request.POST.get("detailed_sector", "")
-        registration_doc = request.FILES.get("registration_doc")
+        birth_date = request.POST.get("birth_date") or None
 
         errors = []
 
@@ -88,21 +84,6 @@ def signup_view(request):
             errors.append(_("Passwords do not match."))
         elif len(password) < 8:
             errors.append(_("Password must be at least 8 characters long."))
-        if not business_name:
-            errors.append(_("Business name is required."))
-        if not phone_number:
-            errors.append(_("Phone number is required."))
-        elif not validate_algerian_phone(phone_number):
-            errors.append(
-                _("Enter a valid Algerian phone number (e.g., 05/06/07 XXXXXXXX).")
-            )
-
-        if not sex:
-            errors.append(_("Sex is required."))
-        if not activity_type:
-            errors.append(_("Activity type is required."))
-        if not registration_doc:
-            errors.append(_("Registration document is required."))
 
         if errors:
             return JsonResponse({"success": False, "errors": errors})
@@ -122,19 +103,18 @@ def signup_view(request):
                 "last_name": last_name,
             }
             profile_data = {
-                "business_name": business_name,
                 "phone_number": phone_number,
                 "sex": sex,
-                "activity_type": activity_type,
-                "detailed_sector": detailed_sector,
+                "birth_date": birth_date,
             }
 
-            user = create_user_account(user_data, profile_data, registration_doc)
+            user = create_user_account(user_data, profile_data, None)
 
             return JsonResponse(
                 {
                     "success": True,
-                    "message": "you're account is now under review, we will let you know when it's approved",
+                    "message": _("Your account has been created successfully."),
+                    "redirect_url": reverse("user_auth:login"),
                 }
             )
         except Exception as e:
@@ -145,6 +125,5 @@ def signup_view(request):
         "auth/signup.html",
         {
             "sex_choices": UserProfile.sexChoices.choices,
-            "activity_choices": UserProfile.activityTypeChoices.choices,
         },
     )

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from decouple import config
 import os
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -122,10 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "ar"
 
-LANGUAGES = [
-    ("ar", "العربية"),
-    ("en", "English"),
-]
+LANGUAGES = [("ar", _("العربية")), ("en", _("English")), ("fr", _("French"))]
 
 TIME_ZONE = "Africa/Algiers"
 
