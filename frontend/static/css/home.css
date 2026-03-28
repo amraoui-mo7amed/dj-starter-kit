@@ -1,272 +1,250 @@
-/* Reset sidebar margins for landing page */
-body.landing-page .main-content {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    width: 100% !important;
+/* Custom Advanced Animations */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
 }
 
-body.landing-page #sidebar {
-    display: none !important;
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* ==========================
-   SOC Landing Page Styles
-   ========================== */
-
-/* Variables & Global */
-:root {
-    --hero-bg: var(--brand-light);
-    --section-padding: 100px 0;
+@keyframes revealLine {
+    0% { height: 0; }
+    100% { height: 100%; }
 }
 
-/* Navbar Branding */
-.navbar-landing .navbar-brand {
-    font-size: 24px;
-    font-weight: 800;
+/* Base Landing Styling */
+.landing-page .main-content {
+    padding: 0 !important;
+    overflow-x: hidden;
+}
+
+/* 1. Hero Section */
+.custom-hero {
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #ffffff, var(--brand-light), #ffffff, var(--brand-light));
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 120px 0;
+}
+
+.hero-tag {
+    background: rgba(var(--brand-primary-rgb, 13, 110, 253), 0.1);
     color: var(--brand-primary);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 20px;
 }
 
-/* Hero Section */
-.hero-wrapper {
-    background: linear-gradient(135deg, #ffffff 0%, var(--brand-light) 100%);
-    padding: 120px 0 80px;
+.hero-title-main {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--brand-dark);
+    margin-bottom: 25px;
+}
+
+.hero-title-main span {
+    color: var(--brand-primary);
+    position: relative;
+}
+
+/* 2. Feature Grid (Bento Style) */
+.section-bento {
+    padding: 100px 0;
+    background: #fff;
+}
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 300px);
+    gap: 24px;
+}
+
+.bento-item {
+    background: #fff;
+    border-radius: 30px;
+    padding: 40px;
     position: relative;
     overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
 }
 
-.hero-wrapper::before {
-    content: "";
-    position: absolute;
-    top: -10%;
-    right: -5%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, var(--brand-secondary) 0%, transparent 70%);
-    opacity: 0.15;
-    z-index: 0;
+.bento-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
 
-.hero-content {
+.bento-1 { grid-column: 1 / 3; }
+.bento-2 { grid-column: 3 / 4; }
+.bento-3 { grid-column: 1 / 2; }
+.bento-4 { grid-column: 2 / 4; }
+
+/* 3. Stats Section */
+.section-stats {
+    padding: 80px 0;
+    background: var(--brand-dark);
+    color: white;
+}
+
+.stat-box {
+    text-align: center;
+    padding: 20px;
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--brand-primary);
+    margin-bottom: 10px;
+}
+
+/* 4. Steps Section */
+.section-steps {
+    padding: 120px 0;
+    position: relative;
+    background: var(--brand-light);
+}
+
+.step-card {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 30px;
+    align-items: center;
+    background: #fff;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+[dir="rtl"] .step-card {
+    flex-direction: row;
+    text-align: right;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: var(--brand-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+[dir="rtl"] .step-number {
+    margin-left: 0;
+}
+
+
+/* 5. Pricing & CTA */
+.section-final {
+    padding: 100px 0;
+    background: var(--brand-light);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
+    padding: 60px;
+    text-align: center;
+}
+
+[dir="rtl"] .hero-title-main { 
+    font-family: 'Cairo', sans-serif; 
+    text-align: center;
+}
+
+[dir="rtl"] .custom-hero p {
+    text-align: center;
+}
+
+/* Bento Grid RTL Support */
+[dir="rtl"] .bento-item {
+    text-align: right;
+}
+
+[dir="rtl"] .bento-item i {
+    display: block;
+    margin-left: 0;
+}
+
+
+.hero-visual-wrapper {
     position: relative;
     z-index: 1;
 }
 
-.hero-title {
-    font-size: 3.5rem;
-    font-weight: 800;
+.shadow-2xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+.fw-black {
+    font-weight: 900;
+}
+
+.text-primary {
+    color: var(--brand-primary) !important;
+}
+
+.btn-primary {
+    background-color: var(--brand-primary);
+    border-color: var(--brand-primary);
+}
+
+.btn-outline-primary {
     color: var(--brand-primary);
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
+    border-color: var(--brand-primary);
 }
 
-.hero-subtitle {
-    font-size: 1.25rem;
-    color: var(--text-main);
-    margin-bottom: 2.5rem;
-    max-width: 600px;
+.btn-outline-primary:hover {
+    background-color: var(--brand-primary);
+    color: white;
 }
 
-/* Features Section */
-.section-features {
-    padding: var(--section-padding);
-    background: #fff;
-}
-
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--brand-primary);
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.section-subtitle {
-    text-align: center;
-    color: #718096;
-    margin-bottom: 4rem;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.feature-card {
-    padding: 40px;
-    border-radius: 24px;
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 100%;
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-    border-color: var(--brand-secondary);
-}
-
-.feature-icon {
-    width: 64px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 16px;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    background: rgba(0, 0, 0, 0.05);
-    color: var(--brand-primary);
-}
-
-/* User Roles Section */
-.section-roles {
-    padding: var(--section-padding);
-    background: #f8fafc;
-}
-
-.role-card {
-    background: #fff;
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.role-header {
-    padding: 40px;
-    color: #fff;
-}
-
-.role-trader { background: var(--brand-primary); }
-.role-manufacturer { background: var(--brand-secondary); }
-
-.role-body {
-    padding: 40px;
-    flex-grow: 1;
-}
-
-.role-list {
-    list-style: none;
-    padding: 0;
-    margin: 2rem 0;
-}
-
-.role-list li {
-    padding: 10px 0;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: #4a5568;
-}
-
-.role-list li i {
-    color: var(--brand-success);
-}
-
-/* Pricing Section */
-.section-pricing {
-    padding: var(--section-padding);
-    background: #fff;
-}
-
-.pricing-card {
-    padding: 40px;
-    border-radius: 24px;
-    background: #fff;
-    border: 2px solid #edf2f7;
-    transition: all 0.3s ease;
-    height: 100%;
-    position: relative;
-}
-
-.pricing-card.popular {
-    border-color: var(--brand-secondary);
-    background: #fbfdff;
-}
-
-.popular-badge {
-    position: absolute;
-    top: 20px;
-    background: var(--brand-secondary);
-    color: #fff;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-}
-[dir="ltr"] .popular-badge {
-    right: 20px;
-    left: auto;
-}
-[dir="rtl"] .popular-badge {
-    right: auto;
-    left: 20px;
-}
-
-.price-tag {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--brand-primary);
-    margin: 1.5rem 0;
-}
-
-.price-tag span {
-    font-size: 1rem;
-    color: #718096;
-    font-weight: 500;
-}
-
-/* CTA Section */
-.section-cta {
-    padding: 80px 0;
-}
-
-.cta-banner {
-    background: linear-gradient(to right, var(--brand-primary), var(--brand-secondary));
-    border-radius: 40px;
-    padding: 60px;
-    color: #fff;
-    text-align: center;
-}
-
-/* LTR/RTL Fixes */
-[dir="rtl"] .hero-title {
-    font-family: 'Cairo', sans-serif;
-}
-
-[dir="rtl"] .hero-subtitle {
-    margin-left: auto;
-    margin-right: 0;
-}
-
-[dir="rtl"] .search-minimal i {
-    left: auto !important;
-    right: 15px !important;
-}
-
-[dir="rtl"] .fa-chevron-right {
-    transform: rotate(180deg);
-}
-
-/* Animations */
-.animate-up {
-    animation: fadeInUp 0.8s ease-out;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+/* Mobile Adjustments */
+@media (max-width: 992px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .bento-1, .bento-2, .bento-3, .bento-4 {
+        grid-column: auto;
+    }
+    
+    .step-card {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 20px;
+    }
+    
+    [dir="rtl"] .step-card {
+        flex-direction: column !important;
     }
 }
 
-/* Responsive */
-@media (max-width: 991.98px) {
-    .hero-title { font-size: 2.5rem; }
-    .hero-wrapper { padding: 80px 0 60px; }
-}

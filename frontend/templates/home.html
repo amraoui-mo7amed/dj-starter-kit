@@ -1,45 +1,29 @@
 {% extends 'index.html' %}
 {% load i18n %}
 {% load static %}
-{% load frontend_tags %}
 
 {% block body_class %}landing-page{% endblock body_class %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static "css/home.css" %}?v={% now "U" %}">
-    <style>
-        .main-content { padding: 0 !important; }
-    </style>
 {% endblock extra_css %}
 
 {% block nav %}
-    <!-- Landing Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 fixed-top" id="landingNav">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-                <img src="{% static 'icons/logo.jpg' %}" alt="Logo" style="height: 40px;" class="rounded">
-                <span class="fw-bold text-dark">
+                <span class="fw-black fs-4 text-dark">
                     {% if IS_RTL %}{{ site_config.ar_name }}{% else %}{{ site_config.name }}{% endif %}
                 </span>
             </a>
-            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#landingNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="landingNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link px-3 fw-bold" href="#features">{% trans "Features" %}</a></li>
-                    <li class="nav-item"><a class="nav-link px-3 fw-bold" href="#solutions">{% trans "Solutions" %}</a></li>
-                    <li class="nav-item"><a class="nav-link px-3 fw-bold" href="#pricing">{% trans "Pricing" %}</a></li>
-                </ul>
-                <div class="d-flex align-items-center gap-3">
-                    {% include 'partials/language_switcher.html' %}
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'dash:dash_home' %}" class="btn btn-primary rounded-pill px-4 fw-bold">{% trans "Dashboard" %}</a>
-                    {% else %}
-                        <a href="{% url 'user_auth:login' %}" class="btn btn-link text-dark fw-bold text-decoration-none">{% trans "Login" %}</a>
-                        <a href="{% url 'user_auth:signup' %}" class="btn btn-primary rounded-pill px-4 fw-bold">{% trans "Get Started" %}</a>
-                    {% endif %}
-                </div>
+            <div class="ms-auto d-flex align-items-center gap-3">
+                {% include 'partials/language_switcher.html' %}
+                {% if user.is_authenticated %}
+                    <a href="{% url 'dash:dash_home' %}" class="btn btn-dark rounded-pill px-4 fw-bold">{% trans "Dashboard" %}</a>
+                {% else %}
+                    <a href="{% url 'user_auth:login' %}" class="btn btn-link text-dark fw-bold text-decoration-none d-none d-md-block">{% trans "Login" %}</a>
+                    <a href="{% url 'user_auth:signup' %}" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm">{% trans "Get Started" %}</a>
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -48,127 +32,126 @@
 {% block sidebar %}{% endblock sidebar %}
 
 {% block content %}
-    <!-- ======= Hero Section ======= -->
-    <header class="hero-wrapper">
+    <!-- 1. Hero Section -->
+    <section class="custom-hero">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 hero-content" data-aos="fade-right">
-                    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3 fw-bold">
-                        {{ site_config.tagline }}
-                    </span>
-                    <h1 class="hero-title">
-                        {% blocktrans with site_name=site_config.name %}Scaffold Your Next Project with {{ site_name }}{% endblocktrans %}
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-10" data-aos="fade-up" data-aos-duration="1000">
+                    <span class="hero-tag">{{ site_config.tagline }}</span>
+                    <h1 class="hero-title-main">
+                        {% if IS_RTL %}
+                            تخطى حدود <span>الإبداع</span> في مشاريعك القادمة
+                        {% else %}
+                            Build <span>Extraordinary</span> Apps at Light Speed
+                        {% endif %}
                     </h1>
-                    <p class="hero-subtitle">
+                    <p class="fs-4 text-muted mb-5 mx-auto" style="max-width: 800px;">
                         {{ site_config.seo.description }}
                     </p>
-                    <div class="d-flex flex-wrap gap-3">
-                        <a href="{% url 'user_auth:signup' %}" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow">
-                            {% trans "Get Started" %}
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="{% url 'user_auth:signup' %}" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow-lg">
+                            {% trans "Launch Now" %}
                         </a>
-                        <a href="#features" class="btn btn-outline-primary btn-lg rounded-pill px-5 fw-bold">
-                            {% trans "Learn More" %}
+                        <a href="#features" class="btn btn-white btn-lg rounded-pill px-5 fw-bold border">
+                            {% trans "See Features" %}
                         </a>
-                    </div>
-                </div>
-                <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left">
-                    <div class="hero-image-placeholder shadow-lg rounded-4 p-4 bg-white" style="border: 8px solid #f1f3f7;">
-                        <img src="{% static "icons/logo.jpg" %}" alt="Logo" class="img-fluid rounded-3 mb-4 mx-auto d-block" style="max-height: 100px;">
-                        <div class="skeleton-ui">
-                            <div class="bg-light rounded-2 mb-3" style="height: 40px; width: 80%;"></div>
-                            <div class="row g-3 mb-4">
-                                <div class="col-6"><div class="bg-light rounded-2" style="height: 100px;"></div></div>
-                                <div class="col-6"><div class="bg-light rounded-2" style="height: 100px;"></div></div>
-                            </div>
-                            <div class="bg-primary bg-opacity-10 rounded-2" style="height: 150px;"></div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
-
-    <!-- ======= Features Section ======= -->
-    <section id="features" class="section-features">
+    <!-- 2. Bento Grid Features -->
+    <section id="features" class="section-bento">
         <div class="container">
-            <h2 class="section-title">{% trans "Powerful Features for Modern Business" %}</h2>
-            <p class="section-subtitle">
-                {% trans "Everything you need to scale your operations from inventory tracking to financial analytics." %}
-            </p>
-            
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-black display-5 mb-3">{% trans "Supercharged Features" %}</h2>
+                <p class="text-muted">{% trans "Designed for modern developers and scaling startups." %}</p>
+            </div>
+            <div class="bento-grid">
+                <div class="bento-item bento-1" data-aos="fade-right">
+                    <i class="fas fa-layer-group fa-3x text-primary mb-4"></i>
+                    <h3 class="fw-bold">{% trans "Scalable Architecture" %}</h3>
+                    <p class="text-muted">{% trans "A clean, modular structure that grows with your team and complexity." %}</p>
+                </div>
+                <div class="bento-item bento-2" data-aos="fade-left">
+                    <i class="fas fa-shield-alt fa-3x text-primary mb-4"></i>
+                    <h3 class="fw-bold">{% trans "Auth Ready" %}</h3>
+                    <p class="text-muted">{% trans "Secure login and signup out of the box." %}</p>
+                </div>
+                <div class="bento-item bento-3" data-aos="fade-up">
+                    <i class="fas fa-language fa-3x text-primary mb-4"></i>
+                    <h3 class="fw-bold">{% trans "Global i18n" %}</h3>
+                    <p class="text-muted">{% trans "Built-in RTL support for Arabic markets." %}</p>
+                </div>
+                <div class="bento-item bento-4" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-code fa-3x text-primary mb-4"></i>
+                    <h3 class="fw-bold">{% trans "Developer Friendly" %}</h3>
+                    <p class="text-muted">{% trans "Written in clean Python with extensive documentation and helper utilities." %}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Stats Bar -->
+    <section class="section-stats">
+        <div class="container">
             <div class="row g-4">
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-qrcode"></i></div>
-                        <h4 class="fw-bold mb-3">{% trans "QR & Barcode Scanning" %}</h4>
-                        <p class="text-muted">{% trans "Instantly add products and scan invoices with automatic data extraction using your device's camera." %}</p>
+                <div class="col-md-3 col-6" data-aos="zoom-in">
+                    <div class="stat-box">
+                        <div class="stat-number">99%</div>
+                        <div class="small text-uppercase opacity-75">{% trans "Code Quality" %}</div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-                        <h4 class="fw-bold mb-3">{% trans "Real-time Tracking" %}</h4>
-                        <p class="text-muted">{% trans "Monitor your stock levels, daily liquidity, and sales performance as they happen." %}</p>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="stat-box">
+                        <div class="stat-number">24/7</div>
+                        <div class="small text-uppercase opacity-75">{% trans "Support" %}</div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-brain"></i></div>
-                        <h4 class="fw-bold mb-3">{% trans "Smart Insights" %}</h4>
-                        <p class="text-muted">{% trans "Receive AI-powered recommendations for stock replenishment and business optimization." %}</p>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="stat-box">
+                        <div class="stat-number">10x</div>
+                        <div class="small text-uppercase opacity-75">{% trans "Speed" %}</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="stat-box">
+                        <div class="stat-number">∞</div>
+                        <div class="small text-uppercase opacity-75">{% trans "Possibilities" %}</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ======= Solutions Section ======= -->
-    <section id="solutions" class="section-roles">
+    <!-- 4. How It Works -->
+    <section class="section-steps">
         <div class="container">
-            <h2 class="section-title">{% trans "Tailored for Your Business Type" %}</h2>
-            <p class="section-subtitle">{% trans "Whether you're a retailer or a manufacturer, SOC adapts to your unique workflow." %}</p>
-            
-            <div class="row g-5">
-                <!-- Trader -->
-                <div class="col-lg-6" data-aos="zoom-in-right">
-                    <div class="role-card">
-                        <div class="role-header role-trader">
-                            <i class="fas fa-store fa-3x mb-3"></i>
-                            <h3 class="fw-bold">{% trans "For Traders" %}</h3>
-                            <p class="mb-0 opacity-75">{% trans "Retailers & Wholesalers" %}</p>
-                        </div>
-                        <div class="role-body">
-                            <ul class="role-list">
-                                <li><i class="fas fa-check-circle"></i> {% trans "Quick Sales Invoicing" %}</li>
-                                <li><i class="fas fa-check-circle"></i> {% trans "Cash & Credit Management" %}</li>
-                                <li><i class="fas fa-check-circle"></i> {% trans "Supplier Debt Tracking" %}</li>
-                                <li><i class="fas fa-check-circle"></i> {% trans "Daily Liquidity Overview" %}</li>
-                            </ul>
-                            <a href="{% url 'user_auth:signup' %}?type=trader" class="btn btn-outline-primary w-100 rounded-pill fw-bold py-3">
-                                {% trans "Join as Trader" %}
-                            </a>
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-black display-5">{% trans "Get Started in Minutes" %}</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="step-card" data-aos="fade-right">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h4 class="fw-bold">{% trans "Clone the Repository" %}</h4>
+                            <p class="text-muted">{% trans "Grab the source code and install the dependencies with a single command." %}</p>
                         </div>
                     </div>
-                </div>
-                <!-- Manufacturer -->
-                <div class="col-lg-6" data-aos="zoom-in-left">
-                    <div class="role-card">
-                        <div class="role-header role-manufacturer">
-                            <i class="fas fa-industry fa-3x mb-3"></i>
-                            <h3 class="fw-bold">{% trans "For Manufacturers" %}</h3>
-                            <p class="mb-0 opacity-75">{% trans "Production Businesses" %}</p>
+                    <div class="step-card" data-aos="fade-left">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h4 class="fw-bold">{% trans "Customize Branding" %}</h4>
+                            <p class="text-muted">{% trans "Update your colors and site details in the central context processor." %}</p>
                         </div>
-                        <div class="role-body">
-                            <ul class="role-list">
-                                <li><i class="fas fa-check-circle"></i> {% trans "Raw Material Consumption" %}</li>
-                                <li><i class="fas fa-check-circle"></i> {% trans "Production Order Workflow" %}</li>
-                                <li><i class="fas fa-check-circle"></i> {% trans "Unit Cost Analytics" %}</li>
-                                <li><i class="fas fa-check-circle"></i> {% trans "Batch Tracking" %}</li>
-                            </ul>
-                            <a href="{% url 'user_auth:signup' %}?type=manufacturer" class="btn btn-outline-primary w-100 rounded-pill fw-bold py-3">
-                                {% trans "Join as Manufacturer" %}
-                            </a>
+                    </div>
+                    <div class="step-card" data-aos="fade-right">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h4 class="fw-bold">{% trans "Deploy & Shine" %}</h4>
+                            <p class="text-muted">{% trans "Push your application to production and start welcoming users." %}</p>
                         </div>
                     </div>
                 </div>
@@ -176,66 +159,17 @@
         </div>
     </section>
 
-    <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="section-pricing">
+    <!-- 5. Final CTA -->
+    <section class="section-final">
         <div class="container">
-            <h2 class="section-title">{% trans "Simple, Transparent Pricing" %}</h2>
-            <div class="row g-4 mt-2">
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="pricing-card">
-                        <h4 class="fw-bold">{% trans "Basic" %}</h4>
-                        <p class="text-muted small">{% trans "Best for small retailers" %}</p>
-                        <div class="price-tag">3,000<span> DZD / {% trans "mo" %}</span></div>
-                        <ul class="list-unstyled mb-4">
-                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Trader features" %}</li>
-                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Basic inventory" %}</li>
-                            <li class="text-muted mb-2"><i class="fas fa-times me-2"></i> {% trans "Smart alerts" %}</li>
-                        </ul>
-                        <button class="btn btn-light w-100 rounded-pill fw-bold">{% trans "Choose Plan" %}</button>
-                    </div>
-                </div>
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="pricing-card popular shadow-sm">
-                        <span class="popular-badge">{% trans "POPULAR" %}</span>
-                        <h4 class="fw-bold">{% trans "Pro" %}</h4>
-                        <p class="text-muted small">{% trans "Advanced features for growth" %}</p>
-                        <div class="price-tag">7,000<span> DZD / {% trans "mo" %}</span></div>
-                        <ul class="list-unstyled mb-4">
-                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Trader & Manufacturer" %}</li>
-                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Smart AI Alerts" %}</li>
-                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Email support" %}</li>
-                        </ul>
-                        <button class="btn btn-primary w-100 rounded-pill fw-bold">{% trans "Choose Plan" %}</button>
-                    </div>
-                </div>
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="pricing-card">
-                        <h4 class="fw-bold">{% trans "Enterprise" %}</h4>
-                        <p class="text-muted small">{% trans "For industrial operations" %}</p>
-                        <div class="price-tag">15,000<span> DZD / {% trans "mo" %}</span></div>
-                        <ul class="list-unstyled mb-4">
-                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Advanced Reports" %}</li>
-                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Priority Support" %}</li>
-                            <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> {% trans "Unlimited Batches" %}</li>
-                        </ul>
-                        <button class="btn btn-light w-100 rounded-pill fw-bold">{% trans "Choose Plan" %}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ======= CTA Section ======= -->
-    <section class="section-cta">
-        <div class="container">
-            <div class="cta-banner shadow-lg" data-aos="zoom-in">
-                <h2 class="fw-bold mb-3">{% trans "Ready to Transform Your Business?" %}</h2>
-                <p class="opacity-75 mb-5 fs-5">
-                    {% trans "Join hundreds of Algerian SMEs using SOC to optimize their operating cycle today." %}
+            <div class="glass-card shadow-2xl" data-aos="zoom-out">
+                <h2 class="fw-black display-4 mb-4">{% trans "Ready to Start Building?" %}</h2>
+                <p class="fs-5 text-muted mb-5 mx-auto" style="max-width: 600px;">
+                    {% blocktrans with site_name=site_config.name %}Join the elite group of developers using {{ site_name }} to ship faster and cleaner code.{% endblocktrans %}
                 </p>
-                <div class="d-flex justify-content-center gap-3 flex-wrap">
-                    <a href="{% url 'user_auth:signup' %}" class="btn btn-light btn-lg rounded-pill px-5 fw-bold text-primary">
-                        {% trans "Get Started for Free" %}
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="{% url 'user_auth:signup' %}" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold">
+                        {% trans "Get Started Now" %}
                     </a>
                 </div>
             </div>
@@ -244,41 +178,29 @@
 {% endblock content %}
 
 {% block footer %}
-    <footer class="bg-dark text-white py-5">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <h4 class="fw-bold mb-4">
-                        {% if IS_RTL %}{{ site_config.ar_name }}{% else %}{{ site_config.name }}{% endif %}
-                    </h4>
-                    <p class="text-secondary small">
-                        {{ site_config.seo.description }}
-                    </p>
-                </div>
-                <div class="col-lg-2 ms-auto">
-                    <h6 class="fw-bold mb-4">{% trans "Quick Links" %}</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#" class="text-secondary text-decoration-none">{% trans "Home" %}</a></li>
-                        <li class="mb-2"><a href="#features" class="text-secondary text-decoration-none">{% trans "Features" %}</a></li>
-                        <li class="mb-2"><a href="#pricing" class="text-secondary text-decoration-none">{% trans "Pricing" %}</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3">
-                    <h6 class="fw-bold mb-4">{% trans "Contact" %}</h6>
-                    {% if site_config.contact_email %}
-                        <p class="text-secondary small mb-1"><i class="fas fa-envelope me-2"></i> {{ site_config.contact_email }}</p>
-                    {% endif %}
-                    {% if site_config.phone %}
-                        <p class="text-secondary small mb-1"><i class="fas fa-phone me-2"></i> {{ site_config.phone }}</p>
-                    {% endif %}
-                </div>
-            </div>
-            <hr class="my-5 border-secondary opacity-25">
-            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
-                <p class="mb-0 text-secondary small">
-                    &copy; {% now "Y" %} {% if IS_RTL %}{{ site_config.ar_name }}{% else %}{{ site_config.name }}{% endif %}. {% trans "All rights reserved." %}
-                </p>
-            </div>
+    <footer class="bg-white py-5 border-top">
+        <div class="container text-center">
+            <p class="mb-2 fw-bold text-dark">
+                {% if IS_RTL %}{{ site_config.ar_name }}{% else %}{{ site_config.name }}{% endif %}
+            </p>
+            <p class="text-muted small mb-0">
+                &copy; {% now "Y" %}. {% trans "All rights reserved." %}
+            </p>
         </div>
     </footer>
 {% endblock footer %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('scroll', () => {
+        const nav = document.getElementById('landingNav');
+        if (window.scrollY > 50) {
+            nav.classList.add('bg-white', 'shadow-sm');
+            nav.classList.remove('bg-transparent');
+        } else {
+            nav.classList.remove('bg-white', 'shadow-sm');
+            nav.classList.add('bg-transparent');
+        }
+    });
+</script>
+{% endblock extra_js %}
