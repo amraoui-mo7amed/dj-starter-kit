@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-28 09:44+0100\n"
-"PO-Revision-Date: 2026-03-28 10:00+0100\n"
+"POT-Creation-Date: 2026-03-28 10:44+0100\n"
+"PO-Revision-Date: 2026-03-28 12:00+0100\n"
 "Last-Translator: Mohamed <mohamed@example.com>\n"
 "Language-Team: French <fr@li.org>\n"
 "Language: fr\n"
@@ -27,9 +27,7 @@ msgstr "Pages de destination basées sur l'IA"
 
 #: core/context_processors.py:25
 msgid "Generate high-converting landing pages in seconds with Gemini AI."
-msgstr ""
-"Générez des pages de destination à haute conversion en quelques secondes "
-"avec Gemini AI."
+msgstr "Générez des pages de destination à haute conversion en quelques secondes avec Gemini AI."
 
 #: core/context_processors.py:28
 msgid "landing page, ai, gemini, merchant, ecommerce, conversion"
@@ -55,62 +53,6 @@ msgstr "Tableau de bord"
 #: dashboard/context_processors.py:17
 msgid "users"
 msgstr "utilisateurs"
-
-#: dashboard/models.py:11
-msgid "معلومة"
-msgstr ""
-
-#: dashboard/models.py:12
-msgid "نجاح"
-msgstr ""
-
-#: dashboard/models.py:13
-msgid "تحذير"
-msgstr ""
-
-#: dashboard/models.py:14
-msgid "خطأ"
-msgstr ""
-
-#: dashboard/models.py:20
-msgid "المستخدم"
-msgstr ""
-
-#: dashboard/models.py:22
-msgid "العنوان"
-msgstr ""
-
-#: dashboard/models.py:23
-msgid "الرسالة"
-msgstr ""
-
-#: dashboard/models.py:28
-msgid "نوع الإشعار"
-msgstr ""
-
-#: dashboard/models.py:30
-msgid "مقروء"
-msgstr ""
-
-#: dashboard/models.py:31
-msgid "تاريخ الإنشاء"
-msgstr ""
-
-#: dashboard/models.py:32
-msgid "تاريخ القراءة"
-msgstr ""
-
-#: dashboard/models.py:36
-msgid "الرابط"
-msgstr ""
-
-#: dashboard/models.py:37
-msgid "رابط اختياري للتنقل"
-msgstr ""
-
-#: dashboard/models.py:41
-msgid "إشعار"
-msgstr ""
 
 #: dashboard/templates/components/notification_dropdown.html:12
 msgid "Notifications"
@@ -151,8 +93,7 @@ msgstr "Gestion de la plateforme et aperçu de la santé du système."
 
 #: dashboard/templates/dash/dash_home.html:27
 msgid "Your project metrics and activity are looking great today."
-msgstr ""
-"Les mesures et l'activité de votre projet sont excellentes aujourd'hui."
+msgstr "Les mesures et l'activité de votre projet sont excellentes aujourd'hui."
 
 #: dashboard/templates/dash/dash_home.html:37
 msgid "Manage Users"
@@ -222,17 +163,13 @@ msgstr "Aperçus intelligents"
 msgid ""
 "System performance is optimal. All 5 services are running within expected "
 "latency bounds."
-msgstr ""
-"Les performances du système sont optimales. Les 5 services fonctionnent dans "
-"les limites de latence attendues."
+msgstr "Les performances du système sont optimales. Les 5 services fonctionnent dans les limites de latence attendues."
 
 #: dashboard/templates/dash/dash_home.html:171
 msgid ""
 "AI has detected a growth trend in your user engagement. Consider launching a "
 "new campaign to capitalize on this traffic."
-msgstr ""
-"L'IA a détecté une tendance de croissance de l'engagement de vos "
-"utilisateurs. Envisagez de lancer une nouvelle campagne."
+msgstr "L'IA a détecté une tendance de croissance de l'engagement de vos utilisateurs. Envisagez de lancer une nouvelle campagne."
 
 #: dashboard/templates/dash/dash_home.html:174
 msgid "Take Action"
@@ -317,8 +254,7 @@ msgstr "Êtes-vous sûr ?"
 #: dashboard/templates/users/details.html:43
 #, python-format
 msgid "You are about to delete %(name)s. This action cannot be undone!"
-msgstr ""
-"Vous êtes sur le point de supprimer %(name)s. Cette action est irréversible !"
+msgstr "Vous êtes sur le point de supprimer %(name)s. Cette action est irréversible !"
 
 #: dashboard/templates/users/details.html:44
 msgid "Yes, delete it!"
@@ -450,10 +386,8 @@ msgstr "Aucun utilisateur trouvé"
 msgid "Try adjusting your filters"
 msgstr "Essayez d'ajuster vos filtres"
 
-#: dashboard/utils.py:22
-#, fuzzy, python-format
-#| msgid "Your SOC Account has been Activated!"
-msgid "Your %(site)s Account has been Activated!"
+#: dashboard/utils.py:18
+msgid "Your SOC Account has been Activated!"
 msgstr "Votre compte a été activé !"
 
 #: dashboard/views/dashboard.py:19
@@ -587,8 +521,7 @@ msgstr "Fonctionnalités suralimentées"
 
 #: frontend/templates/home.html:69
 msgid "Designed for modern developers and scaling startups."
-msgstr ""
-"Conçu pour les développeurs modernes et les startups en pleine croissance."
+msgstr "Conçu pour les développeurs modernes et les startups en pleine croissance."
 
 #: frontend/templates/home.html:74
 msgid "Scalable Architecture"

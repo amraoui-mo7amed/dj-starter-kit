@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-28 09:44+0100\n"
-"PO-Revision-Date: 2026-03-28 10:00+0100\n"
+"POT-Creation-Date: 2026-03-28 10:44+0100\n"
+"PO-Revision-Date: 2026-03-28 12:00+0100\n"
 "Last-Translator: Mohamed <mohamed@example.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "Language: ar\n"
@@ -40,11 +40,11 @@ msgstr "العربية"
 
 #: core/settings.py:127
 msgid "English"
-msgstr "الإنجليزية"
+msgstr "English"
 
 #: core/settings.py:127
 msgid "French"
-msgstr "الفرنسية"
+msgstr "French"
 
 #: dashboard/context_processors.py:11
 #: dashboard/templates/dash/dash_index.html:86 frontend/templates/home.html:22
@@ -54,62 +54,6 @@ msgstr "لوحة التحكم"
 #: dashboard/context_processors.py:17
 msgid "users"
 msgstr "المستخدمون"
-
-#: dashboard/models.py:11
-msgid "معلومة"
-msgstr ""
-
-#: dashboard/models.py:12
-msgid "نجاح"
-msgstr ""
-
-#: dashboard/models.py:13
-msgid "تحذير"
-msgstr ""
-
-#: dashboard/models.py:14
-msgid "خطأ"
-msgstr ""
-
-#: dashboard/models.py:20
-msgid "المستخدم"
-msgstr ""
-
-#: dashboard/models.py:22
-msgid "العنوان"
-msgstr ""
-
-#: dashboard/models.py:23
-msgid "الرسالة"
-msgstr ""
-
-#: dashboard/models.py:28
-msgid "نوع الإشعار"
-msgstr ""
-
-#: dashboard/models.py:30
-msgid "مقروء"
-msgstr ""
-
-#: dashboard/models.py:31
-msgid "تاريخ الإنشاء"
-msgstr ""
-
-#: dashboard/models.py:32
-msgid "تاريخ القراءة"
-msgstr ""
-
-#: dashboard/models.py:36
-msgid "الرابط"
-msgstr ""
-
-#: dashboard/models.py:37
-msgid "رابط اختياري للتنقل"
-msgstr ""
-
-#: dashboard/models.py:41
-msgid "إشعار"
-msgstr ""
 
 #: dashboard/templates/components/notification_dropdown.html:12
 msgid "Notifications"
@@ -220,16 +164,13 @@ msgstr "رؤى ذكية"
 msgid ""
 "System performance is optimal. All 5 services are running within expected "
 "latency bounds."
-msgstr ""
-"أداء النظام مثالي. جميع الخدمات الـ 5 تعمل ضمن حدود زمن الاستجابة المتوقعة."
+msgstr "أداء النظام مثالي. جميع الخدمات الـ 5 تعمل ضمن حدود زمن الاستجابة المتوقعة."
 
 #: dashboard/templates/dash/dash_home.html:171
 msgid ""
 "AI has detected a growth trend in your user engagement. Consider launching a "
 "new campaign to capitalize on this traffic."
-msgstr ""
-"اكتشف الذكاء الاصطناعي اتجاهاً للنمو في تفاعل المستخدمين. فكر في إطلاق حملة "
-"جديدة للاستفادة من هذا الزخم."
+msgstr "اكتشف الذكاء الاصطناعي اتجاهاً للنمو في تفاعل المستخدمين. فكر في إطلاق حملة جديدة للاستفادة من هذا الزخم."
 
 #: dashboard/templates/dash/dash_home.html:174
 msgid "Take Action"
@@ -446,10 +387,8 @@ msgstr "لم يتم العثور على مستخدمين"
 msgid "Try adjusting your filters"
 msgstr "حاول تعديل خيارات التصفية"
 
-#: dashboard/utils.py:22
-#, fuzzy, python-format
-#| msgid "Your SOC Account has been Activated!"
-msgid "Your %(site)s Account has been Activated!"
+#: dashboard/utils.py:18
+msgid "Your SOC Account has been Activated!"
 msgstr "تم تفعيل حسابك!"
 
 #: dashboard/views/dashboard.py:19
@@ -863,7 +802,7 @@ msgstr "البريد الإلكتروني مطلوب."
 
 #: user_auth/views.py:82
 msgid "Password is required."
-msgstr "كلمة المرور مطلوبة."
+msgstr "كلمة المرور مطلوب."
 
 #: user_auth/views.py:84
 msgid "Passwords do not match."
