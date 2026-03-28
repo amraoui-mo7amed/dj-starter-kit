@@ -294,6 +294,14 @@ footer p {
   z-index: 10;
 }
 
+[dir="ltr"] .language-switcher-top {
+  right: 15px;
+}
+
+[dir="rtl"] .language-switcher-top {
+  left: 15px;
+}
+
 .language-dropdown .lang-toggle {
   border-radius: 20px;
   padding: 6px 16px;
@@ -319,10 +327,114 @@ footer p {
   min-width: 140px;
 }
 
+[dir="ltr"] .language-dropdown .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+[dir="rtl"] .language-dropdown .dropdown-menu {
+  left: 0;
+  right: auto;
+}
+
+.language-dropdown .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  width: 100%;
+  text-align: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
 .language-dropdown .dropdown-item:hover {
   background: rgba(0, 0, 0, 0.05);
   color: var(--brand-primary);
 }
+
+.language-dropdown .dropdown-item.active {
+  background: var(--brand-primary) !important;
+  color: white !important;
+}
+
+/* Form Inputs RTL/LTR Support */
+[dir="ltr"] .form-control {
+  text-align: left;
+}
+
+[dir="rtl"] .form-control {
+  text-align: right;
+}
+
+[dir="ltr"] .form-control::placeholder {
+  text-align: left;
+}
+
+[dir="rtl"] .form-control::placeholder {
+  text-align: right;
+}
+
+/* Input Group Alignment */
+[dir="ltr"] .input-group-text {
+    border-radius: 12px 0 0 12px;
+}
+
+[dir="rtl"] .input-group-text {
+    border-radius: 0 12px 12px 0;
+}
+
+[dir="ltr"] .input-group .form-control {
+    border-radius: 0 12px 12px 0;
+}
+
+[dir="rtl"] .input-group .form-control {
+    border-radius: 12px 0 0 12px;
+}
+
+/* Password field internal support */
+.password-field {
+    position: relative;
+}
+
+[dir="ltr"] .password-field .form-control {
+    padding-right: 50px;
+    padding-left: 12px;
+}
+
+[dir="rtl"] .password-field .form-control {
+    padding-left: 50px;
+    padding-right: 12px;
+}
+
+.password-toggle {
+    color: var(--brand-secondary);
+    background: none;
+    border: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+    padding: 8px;
+    transition: color 0.2s ease;
+}
+
+[dir="ltr"] .password-toggle {
+    right: 15px;
+}
+
+[dir="rtl"] .password-toggle {
+    left: 15px;
+}
+
+.password-toggle:hover {
+    color: var(--brand-primary);
+}
+
+
 
 .language-dropdown .dropdown-item.active {
   background: var(--brand-primary) !important;
@@ -372,6 +484,90 @@ Custom File Input Styling
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/*==========================
+Custom File Input Styling
+==========================*/
+.file-input-container {
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: .375rem .75rem;
+    background-color: var(--white-accent);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 50px;
+}
+
+.file-input-container:hover {
+    border-color: var(--brand-secondary);
+}
+
+.file-input-container.active, 
+.file-input-container.has-file {
+    border-color: var(--brand-primary);
+}
+
+.file-input-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.file-icon {
+    font-size: 1.2rem;
+    color: var(--brand-secondary);
+    flex-shrink: 0;
+}
+
+.file-placeholder {
+    color: #6c757d;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-name {
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.visually-hidden-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+[dir="ltr"] .file-input-content {
+    text-align: left;
+}
+
+[dir="rtl"] .file-input-content {
+    text-align: right;
+    flex-direction: row;
+}
+
+/* Spinner color */
+.spinner-border-sm {
+    --bs-spinner-border-width: 0.2em;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    border-right-color: white !important;
 }
 
 /*==========================

@@ -10,28 +10,75 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="{{ site_config.seo.description }}">
-        <meta name="keywords" content="{{ site_config.seo.keywords }}">
-        <link rel="icon" type="image/png" href="{% static 'icons/logo.jpg' %}">
+        <meta name="description" content="{{ site_config.seo.description }}" />
+        <meta name="keywords" content="{{ site_config.seo.keywords }}" />
+        <link rel="icon" type="image/png" href="{% static 'icons/logo.jpg' %}" />
         <title>
             {% if IS_RTL %}
-                {{ site_config.ar_name }}
+                {{ site_config.ar_name }} |
             {% else %}
                 {{ site_config.name }}
             {% endif %}
             {% block title %}
             {% endblock title %}
         </title>
-
         <style>
             :root {
-                --primary-color: {{ site_config.branding.primary_color }};
-                --secondary-color: {{ site_config.branding.secondary_color }};
-                --accent-color: {{ site_config.branding.accent_color }};
-                --success-color: {{ site_config.branding.success_color }};
-                --danger-color: {{ site_config.branding.danger_color }};
-                --dark-color: {{ site_config.branding.dark_color }};
-                --light-color: {{ site_config.branding.light_color }};
+                --primary-color: {
+                        {
+                        site_config.branding.primary_color
+                    }
+                }
+
+                ;
+
+                --secondary-color: {
+                        {
+                        site_config.branding.secondary_color
+                    }
+                }
+
+                ;
+
+                --accent-color: {
+                        {
+                        site_config.branding.accent_color
+                    }
+                }
+
+                ;
+
+                --success-color: {
+                        {
+                        site_config.branding.success_color
+                    }
+                }
+
+                ;
+
+                --danger-color: {
+                        {
+                        site_config.branding.danger_color
+                    }
+                }
+
+                ;
+
+                --dark-color: {
+                        {
+                        site_config.branding.dark_color
+                    }
+                }
+
+                ;
+
+                --light-color: {
+                        {
+                        site_config.branding.light_color
+                    }
+                }
+
+                ;
             }
         </style>
         <!-- Bootstrap CSS -->
@@ -70,7 +117,11 @@
                     </button>
                     <a class="navbar-brand" href="/">
                         <i class="fas fa-cube me-2"></i>
-                        {% if IS_RTL %}{{ site_config.ar_name }}{% else %}{{ site_config.name }}{% endif %}
+                        {% if IS_RTL %}
+                            {{ site_config.ar_name }}
+                        {% else %}
+                            {{ site_config.name }}
+                        {% endif %}
                     </a>
                     <button class="navbar-toggler"
                             type="button"
@@ -154,7 +205,12 @@
             <footer class="bg-white py-4 mt-5 border-top">
                 <div class="container text-center">
                     <p class="mb-0">
-                        © {% now "Y" %} {% if IS_RTL %}{{ site_config.ar_name }}{% else %}{{ site_config.name }}{% endif %}
+                        © {% now "Y" %}
+                        {% if IS_RTL %}
+                            {{ site_config.ar_name }}
+                        {% else %}
+                            {{ site_config.name }}
+                        {% endif %}
                     </p>
                     <p class="mb-0 small">
                         {% if site_config.contact_email %}

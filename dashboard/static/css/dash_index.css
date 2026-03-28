@@ -29,6 +29,7 @@
 [dir="rtl"] .sidebar { right: 0; left: auto; }
 [dir="ltr"] .sidebar { left: 0; right: auto; }
 
+
 .sidebar-header {
     height: var(--header-height);
     display: flex;
@@ -52,11 +53,27 @@
     gap: 14px;
     font-weight: 500;
     font-size: 0.95rem;
-    border-radius: 0;
-    margin: 0;
     transition: all 0.2s ease;
     border-left: 3px solid transparent;
 }
+
+[dir="rtl"] .sidebar .nav-link { border-left: none; border-right: 3px solid transparent; }
+
+.sidebar .nav-link:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar .nav-link.active {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left-color: var(--brand-primary);
+}
+
+[dir="rtl"] .sidebar .nav-link.active {
+    border-right-color: var(--brand-primary);
+}
+
 
 [dir="rtl"] .sidebar .nav-link { border-left: none; border-right: 3px solid transparent; }
 
@@ -90,8 +107,15 @@
     width: 100%;
 }
 
-[dir="rtl"] .dashContent { margin-right: var(--sidebar-width); }
-[dir="ltr"] .dashContent { margin-left: var(--sidebar-width); }
+[dir="rtl"] .dashContent { 
+    margin-right: var(--sidebar-width); 
+    margin-left: 0;
+}
+[dir="ltr"] .dashContent { 
+    margin-left: var(--sidebar-width); 
+    margin-right: 0;
+}
+
 
 .dash-header {
     height: var(--header-height);
@@ -170,8 +194,16 @@
 @media (max-width: 991.98px) {
     .sidebar { width: var(--sidebar-collapsed-width); }
     .sidebar span, .sidebar-brand-text { display: none; }
-    [dir="rtl"] .dashContent { margin-right: var(--sidebar-collapsed-width); }
-    [dir="ltr"] .dashContent { margin-left: var(--sidebar-collapsed-width); }
+    
+    [dir="rtl"] .dashContent { 
+        margin-right: var(--sidebar-collapsed-width); 
+        margin-left: 0;
+    }
+    [dir="ltr"] .dashContent { 
+        margin-left: var(--sidebar-collapsed-width); 
+        margin-right: 0;
+    }
+    
     .sidebar .nav-link { justify-content: center; padding: 1.2rem 0; }
     .sidebar .nav-link i { margin: 0; }
     .sidebar-header { justify-content: center; padding: 0; }
@@ -179,8 +211,16 @@
 }
 
 @media (max-width: 575.98px) {
-    .sidebar { transform: translateX(100%); }
-    [dir="ltr"] .sidebar { transform: translateX(-100%); }
+    .sidebar { 
+        transform: translateX(100%); 
+        left: auto;
+        right: 0;
+    }
+    [dir="ltr"] .sidebar { 
+        transform: translateX(-100%); 
+        right: auto;
+        left: 0;
+    }
     .sidebar.show { transform: translateX(0); width: var(--sidebar-width); }
     .sidebar.show span, .sidebar.show .sidebar-brand-text {
         display: inline;
@@ -188,3 +228,4 @@
     .dashContent { margin: 0 !important; }
     .dash-header { padding: 0 1rem; }
 }
+
