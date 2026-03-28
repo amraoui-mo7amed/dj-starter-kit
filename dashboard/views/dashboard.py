@@ -9,22 +9,21 @@ import json
 @login_required
 def dash_home(request):
     user_profile = getattr(request.user, "profile", None)
-    role = user_profile.activity_type if user_profile else "trader"
 
     # Common Data
     context = {
-        "role": role,
+        "role": "admin" if request.user.is_superuser else "user",
         "notifications": [
             {
                 "type": "warning",
-                "title": _("Low Stock"),
-                "message": _("Product 'A' is below threshold."),
+                "title": _("System Alert"),
+                "message": _("New security update available."),
                 "time": "2h ago",
             },
             {
                 "type": "info",
-                "title": _("Payment Due"),
-                "message": _("Supplier 'X' invoice is due in 2 days."),
+                "title": _("Welcome"),
+                "message": _("Welcome to your new dashboard!"),
                 "time": "5h ago",
             },
         ],
@@ -33,16 +32,12 @@ def dash_home(request):
     if request.user.is_superuser:
         # Platform Admin Statistics
         total_users = User.objects.count()
-        approved_merchants = UserProfile.objects.filter(is_approved=True).count()
+        approved_users = UserProfile.objects.filter(is_approved=True).count()
         pending_approval = UserProfile.objects.filter(is_approved=False).count()
-        traders_count = UserProfile.objects.filter(activity_type="trader").count()
-        manufacturers_count = UserProfile.objects.filter(
-            activity_type="manufacturer"
-        ).count()
+        staff_count = User.objects.filter(is_staff=True).count()
 
         context.update(
             {
-                "role": "admin",
                 "stat_1": {
                     "title": _("Total Users"),
                     "value": total_users,
@@ -50,8 +45,8 @@ def dash_home(request):
                     "color": "primary",
                 },
                 "stat_2": {
-                    "title": _("Approved Merchants"),
-                    "value": approved_merchants,
+                    "title": _("Approved Users"),
+                    "value": approved_users,
                     "icon": "fa-user-check",
                     "color": "success",
                 },
@@ -63,102 +58,65 @@ def dash_home(request):
                 },
                 "stat_4": {
                     "title": _("Staff Members"),
-                    "value": User.objects.filter(is_staff=True).count(),
+                    "value": staff_count,
                     "icon": "fa-user-shield",
                     "color": "info",
                 },
-                "chart_title": _("Users Distribution"),
+                "chart_title": _("Registration Trends"),
                 "user_dist_labels": json.dumps(
-                    [str(_("Traders")), str(_("Manufacturers"))]
+                    [str(_("Jan")), str(_("Feb")), str(_("Mar"))]
                 ),
-                "user_dist_values": json.dumps([traders_count, manufacturers_count]),
+                "user_dist_values": json.dumps(
+                    [total_users, approved_users, pending_approval]
+                ),
                 "list_title": _("Recent Registrations"),
                 "recent_users": UserProfile.objects.select_related("user").order_by(
                     "-created_at"
                 )[:5],
             }
         )
-    elif role == "manufacturer":
-        # Manufacturer specific dummy data
+    else:
+        # Generic User Dashboard with dummy data
         context.update(
             {
                 "stat_1": {
-                    "title": _("Raw Materials"),
-                    "value": "1,200 kg",
-                    "trend": "5.4",
-                    "icon": "fa-fill-drip",
-                    "color": "info",
-                },
-                "stat_2": {
-                    "title": _("Production Cost"),
-                    "value": "240.00 DZD",
-                    "trend": "2.1",
-                    "icon": "fa-coins",
+                    "title": _("Active Projects"),
+                    "value": "12",
+                    "trend": "2.4",
+                    "icon": "fa-rocket",
                     "color": "primary",
                 },
-                "stat_3": {
-                    "title": _("Active Batches"),
-                    "value": "12",
-                    "trend": "10.5",
-                    "icon": "fa-industry",
+                "stat_2": {
+                    "title": _("Completed Tasks"),
+                    "value": "85",
+                    "trend": "1.1",
+                    "icon": "fa-check-double",
                     "color": "success",
                 },
-                "stat_4": {
-                    "title": _("Ready Products"),
-                    "value": "850",
-                    "icon": "fa-box",
+                "stat_3": {
+                    "title": _("Pending Actions"),
+                    "value": "4",
+                    "trend": "0.5",
+                    "icon": "fa-clock",
                     "color": "warning",
                 },
-                "chart_title": _("Production Volume (Week)"),
-                "chart_values": json.dumps([120, 150, 180, 200, 170, 220, 250]),
-                "list_title": _("Active Production Orders"),
-                "list_items": ["Order #102", "Order #105", "Order #108"],
-            }
-        )
-    else:
-        # Trader specific dummy data
-        context.update(
-            {
-                "stat_1": {
-                    "title": _("Daily Liquidity"),
-                    "value": "45,000.00 DZD",
-                    "trend": "12.5",
-                    "icon": "fa-wallet",
-                    "color": "success",
-                },
-                "stat_2": {
-                    "title": _("Total Sales"),
-                    "value": "125,000.50 DZD",
-                    "trend": "8.2",
-                    "icon": "fa-shopping-cart",
-                    "color": "primary",
-                },
-                "stat_3": {
-                    "title": _("Overdue Invoices"),
-                    "value": "5",
-                    "trend": "1.5",
-                    "icon": "fa-file-invoice-dollar",
-                    "color": "danger",
-                    "trend_dir": "up",
-                    "trend_color": "danger",
-                },
                 "stat_4": {
-                    "title": _("Inventory Items"),
-                    "value": "1,240",
-                    "icon": "fa-boxes",
+                    "title": _("Total Hours"),
+                    "value": "320",
+                    "icon": "fa-stopwatch",
                     "color": "info",
                 },
-                "chart_title": _("Weekly Sales Revenue"),
-                "chart_values": json.dumps(
-                    [12000, 15000, 8000, 19000, 22000, 18000, 25000]
-                ),
-                "list_title": _("Top Selling Products"),
-                "list_items": ["Product A", "Product B", "Product C"],
-                "top_products": json.dumps(
-                    ["Product A", "Product B", "Product C", "Product D", "Product E"]
-                ),
-                "top_qty": json.dumps([50, 40, 35, 30, 25]),
+                "chart_title": _("Weekly Activity"),
+                "chart_values": json.dumps([12, 15, 8, 19, 22, 18, 25]),
+                "list_title": _("Upcoming Tasks"),
+                "list_items": [
+                    _("Launch Website"),
+                    _("Database Migration"),
+                    _("Client Meeting"),
+                ],
             }
         )
+
+    return render(request, "dash/dash_home.html", context)
 
     return render(request, "dash/dash_home.html", context)

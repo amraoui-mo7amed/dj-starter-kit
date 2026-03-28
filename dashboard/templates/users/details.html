@@ -20,9 +20,9 @@
             <div class="d-flex gap-2">
                 {% if not profile.is_approved %}
                 <button id="approveUserBtn"
-                        data-business-name="{{ profile.business_name }}"
+                        data-business-name="{{ profile.user.get_full_name|default:profile.user.username }}"
                         data-swal-title="{% trans 'Approve User?' %}"
-                        data-swal-text="{% blocktrans with name=profile.business_name %}Are you sure you want to approve {{ name }}?{% endblocktrans %}"
+                        data-swal-text="{% blocktrans with name=profile.user.get_full_name|default:profile.user.username %}Are you sure you want to approve {{ name }}?{% endblocktrans %}"
                         data-swal-confirm="{% trans 'Yes, approve!' %}"
                         data-swal-cancel="{% trans 'Cancel' %}"
                         data-swal-success-title="{% trans 'Success!' %}"
@@ -38,9 +38,9 @@
                 
                 <button id="deleteUserBtn" 
                         data-user-id="{{ profile.pk }}" 
-                        data-business-name="{{ profile.business_name }}"
+                        data-business-name="{{ profile.user.get_full_name|default:profile.user.username }}"
                         data-swal-title="{% trans 'Are you sure?' %}"
-                        data-swal-text="{% blocktrans with name=profile.business_name %}You are about to delete {{ name }}. This action cannot be undone!{% endblocktrans %}"
+                        data-swal-text="{% blocktrans with name=profile.user.get_full_name|default:profile.user.username %}You are about to delete {{ name }}. This action cannot be undone!{% endblocktrans %}"
                         data-swal-confirm="{% trans 'Yes, delete it!' %}"
                         data-swal-cancel="{% trans 'Cancel' %}"
                         data-swal-success-title="{% trans 'Deleted!' %}"
@@ -64,8 +64,8 @@
                              style="width: 100px; height: 100px; font-size: 2.5rem; color: #fff !important;">
                             {{ profile.user.username|slice:":1"|upper }}
                         </div>
-                        <h4 class="fw-bold text-dark mb-1">{{ profile.business_name }}</h4>
-                        <p class="text-muted mb-0">{{ profile.user.get_full_name|default:profile.user.username }}</p>
+                        <h4 class="fw-bold text-dark mb-1">{{ profile.user.get_full_name|default:profile.user.username }}</h4>
+                        <p class="text-muted mb-0">@{{ profile.user.username }}</p>
                     </div>
                     <div class="card-body p-4">
                         <div class="list-group list-group-flush border-0">
@@ -101,55 +101,32 @@
                     <div class="card-body p-4">
                         <div class="row g-4">
                             <div class="col-12 col-md-6">
-                                <label class="form-label smaller text-muted fw-bold text-uppercase mb-1 d-block">{% trans "Business Email" %}</label>
+                                <label class="form-label smaller text-muted fw-bold text-uppercase mb-1 d-block">{% trans "Email" %}</label>
                                 <p class="text-dark fw-bold mb-0"><i class="far fa-envelope text-muted me-2"></i> {{ profile.user.email|default:"--" }}</p>
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label smaller text-muted fw-bold text-uppercase mb-1 d-block">{% trans "Phone Number" %}</label>
-                                <p class="text-dark fw-bold mb-0"><i class="fas fa-phone-alt text-muted me-2"></i> {{ profile.phone_number }}</p>
+                                <p class="text-dark fw-bold mb-0"><i class="fas fa-phone-alt text-muted me-2"></i> {{ profile.phone_number|default:"--" }}</p>
                             </div>
                             <div class="col-12 col-md-6">
-                                <label class="form-label smaller text-muted fw-bold text-uppercase mb-1 d-block">{% trans "Activity Type" %}</label>
-                                <p class="text-dark fw-bold mb-0"><i class="fas fa-briefcase text-muted me-2"></i> {{ profile.get_activity_type_display }}</p>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <label class="form-label smaller text-muted fw-bold text-uppercase mb-1 d-block">{% trans "Detailed Sector" %}</label>
-                                <p class="text-dark fw-bold mb-0"><i class="fas fa-layer-group text-muted me-2"></i> {{ profile.detailed_sector|default:_("Not specified") }}</p>
+                                <label class="form-label smaller text-muted fw-bold text-uppercase mb-1 d-block">{% trans "Birth Date" %}</label>
+                                <p class="text-dark fw-bold mb-0"><i class="fas fa-calendar-alt text-muted me-2"></i> {{ profile.birth_date|default:"--" }}</p>
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label smaller text-muted fw-bold text-uppercase mb-1 d-block">{% trans "Gender" %}</label>
                                 <p class="text-dark fw-bold mb-0">
                                     <i class="fas {% if profile.sex == 'male' %}fa-mars{% else %}fa-venus{% endif %} text-muted me-2"></i> 
-                                    {{ profile.get_sex_display }}
+                                    {{ profile.get_sex_display|default:"--" }}
                                 </p>
                             </div>
-                        </div>
-
-                        <hr class="my-4 opacity-5">
-
-                        <div class="col-12">
-                            <h6 class="fw-bold mb-3 text-dark">{% trans "Business Verification Document" %}</h6>
-                            {% if profile.registration_doc %}
-                            <div class="p-4 border rounded-4 d-flex align-items-center justify-content-between bg-light" style="border-style: dashed !important; border-width: 2px !important;">
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="icon-box bg-white shadow-sm rounded-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                                        <i class="far fa-file-alt fa-2x text-primary"></i>
-                                    </div>
-                                    <div>
-                                        <p class="mb-0 fw-bold small text-dark">{% trans "Registration Document" %}</p>
-                                        <p class="mb-0 smaller text-muted">{% trans "Click to view document" %}</p>
-                                    </div>
-                                </div>
-                                <a href="{{ profile.registration_doc.url }}" target="_blank" class="btn btn-primary rounded-pill btn-sm px-4 fw-bold shadow-sm">
-                                    <i class="fas fa-external-link-alt me-1"></i> {% trans "View Document" %}
-                                </a>
+                            <div class="col-12">
+                                <label class="form-label smaller text-muted fw-bold text-uppercase mb-1 d-block">{% trans "Address" %}</label>
+                                <p class="text-dark fw-bold mb-0"><i class="fas fa-map-marker-alt text-muted me-2"></i> {{ profile.address|default:"--" }}</p>
                             </div>
-                            {% else %}
-                            <div class="alert alert-light border rounded-4 text-muted small d-flex align-items-center gap-3 py-4">
-                                <i class="fas fa-exclamation-triangle fa-lg"></i>
-                                <span>{% trans "No document has been uploaded for this user yet." %}</span>
+                            <div class="col-12">
+                                <label class="form-label smaller text-muted fw-bold text-uppercase mb-1 d-block">{% trans "Bio" %}</label>
+                                <p class="text-dark mb-0 bg-light p-3 rounded-3 border-start border-4 border-primary">{{ profile.bio|default:_("No bio provided.") }}</p>
                             </div>
-                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -157,3 +134,4 @@
         </div>
     </div>
 {% endblock dashContent %}
+

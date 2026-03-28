@@ -14,7 +14,6 @@ from django.db import transaction
 @admin_required
 def user_list(request):
     query = request.GET.get("q", "")
-    activity_type = request.GET.get("activity_type", "")
     status = request.GET.get("status", "")
 
     profiles_list = (
@@ -23,14 +22,11 @@ def user_list(request):
 
     if query:
         profiles_list = profiles_list.filter(
-            Q(business_name__icontains=query)
+            Q(user__email__icontains=query)
             | Q(user__username__icontains=query)
             | Q(user__first_name__icontains=query)
             | Q(user__last_name__icontains=query)
         )
-
-    if activity_type:
-        profiles_list = profiles_list.filter(activity_type=activity_type)
 
     if status:
         is_approved = status == "approved"
@@ -41,22 +37,11 @@ def user_list(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
-    activity_choices = [("", _("All Activities"))] + list(
-        UserProfile.activityTypeChoices.choices
-    )
-
     status_choices = [
         ("", _("All Status")),
         ("approved", _("Approved")),
         ("pending", _("Pending")),
     ]
-
-    # Calculate display labels for selected values
-    selected_activity_label = _("All Activities")
-    for val, label in activity_choices:
-        if val == activity_type:
-            selected_activity_label = label
-            break
 
     selected_status_label = _("All Status")
     for val, label in status_choices:
@@ -67,11 +52,8 @@ def user_list(request):
     context = {
         "page_obj": page_obj,
         "profiles": page_obj,  # Compatibility with template
-        "activity_choices": activity_choices,
         "status_choices": status_choices,
         "query": query,
-        "selected_activity": activity_type,
-        "selected_activity_label": selected_activity_label,
         "selected_status": status,
         "selected_status_label": selected_status_label,
     }
@@ -89,14 +71,14 @@ def user_details(request, pk):
 def user_delete(request, pk):
     profile = get_object_or_404(UserProfile, pk=pk)
     if request.method == "POST":
-        business_name = profile.business_name
+        full_name = profile.user.get_full_name() or profile.user.username
         profile.user.delete()  # Cascade will delete the profile
 
         return JsonResponse(
             {
                 "success": True,
                 "message": _("User %(name)s deleted successfully.")
-                % {"name": business_name},
+                % {"name": full_name},
                 "redirect_url": reverse("dash:user_list"),
             }
         )
@@ -117,7 +99,6 @@ def user_approve(request, pk):
                 email_sent = send_account_activation_email(request, profile)
 
                 if not email_sent:
-                    # Manually trigger rollback by raising an exception or setting rollback
                     transaction.set_rollback(True)
                     return JsonResponse(
                         {
@@ -128,8 +109,9 @@ def user_approve(request, pk):
                         }
                     )
 
+                full_name = profile.user.get_full_name() or profile.user.username
                 success_msg = _("User %(name)s approved successfully.") % {
-                    "name": profile.business_name
+                    "name": full_name
                 }
                 return JsonResponse({"success": True, "message": success_msg})
         except Exception as e:

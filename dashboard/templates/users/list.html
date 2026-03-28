@@ -66,13 +66,8 @@
                                 <div class="position-relative">
                                     <input type="text" name="q" value="{{ query }}" 
                                            class="form-control modern-input" 
-                                           placeholder="{% trans 'Name, Business, Username...' %}">
+                                           placeholder="{% trans 'Name, Username, Email...' %}">
                                 </div>
-                            </div>
-
-                            <!-- Activity Type -->
-                            <div class="mb-4">
-                                {% include "components/custom_select.html" with id="modalActivitySelect" name="activity_type" label=_("Activity Type") choices=activity_choices value=selected_activity select_title=selected_activity_label %}
                             </div>
 
                             <!-- Status -->
@@ -102,8 +97,8 @@
                     <!-- Top Section with Gradient and Badges -->
                     <div class="card-header-gradient">
                         <div class="activity-badge-floating">
-                             <i class="fas {% if profile.activity_type == 'manufacturer' %}fa-industry{% else %}fa-store{% endif %} me-1"></i>
-                             {{ profile.get_activity_type_display }}
+                             <i class="fas fa-user me-1"></i>
+                             {% trans "User" %}
                         </div>
                         <div class="status-badge-premium">
                             {% if profile.is_approved %}
@@ -124,7 +119,7 @@
                     </div>
                     
                     <div class="card-body pt-5 text-center">
-                        <h5 class="fw-bold text-dark mb-1 mt-2 text-truncate px-2">{{ profile.business_name }}</h5>
+                        <h5 class="fw-bold text-dark mb-1 mt-2 text-truncate px-2">{{ profile.user.get_full_name|default:profile.user.username }}</h5>
                         <p class="text-muted small mb-4">
                             <span class="opacity-50">@</span>{{ profile.user.username }}
                         </p>
@@ -132,11 +127,11 @@
                         <div class="info-grid-modern text-start">
                             <div class="info-item-modern">
                                 <div class="info-icon-wrapper">
-                                    <i class="fas fa-user-tie small"></i>
+                                    <i class="fas fa-envelope small"></i>
                                 </div>
                                 <div class="overflow-hidden">
-                                    <p class="smaller text-muted mb-0 lh-1">{% trans "Merchant Name" %}</p>
-                                    <p class="small text-dark fw-bold mb-0 text-truncate">{{ profile.user.get_full_name|default:profile.user.username }}</p>
+                                    <p class="smaller text-muted mb-0 lh-1">{% trans "Email" %}</p>
+                                    <p class="small text-dark fw-bold mb-0 text-truncate">{{ profile.user.email }}</p>
                                 </div>
                             </div>
                             
@@ -146,7 +141,7 @@
                                 </div>
                                 <div>
                                     <p class="smaller text-muted mb-0 lh-1">{% trans "Phone Number" %}</p>
-                                    <p class="small text-dark fw-bold mb-0">{{ profile.phone_number }}</p>
+                                    <p class="small text-dark fw-bold mb-0">{{ profile.phone_number|default:"-" }}</p>
                                 </div>
                             </div>
                         </div>
