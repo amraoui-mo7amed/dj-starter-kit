@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-28 08:48+0100\n"
+"POT-Creation-Date: 2026-03-28 09:16+0100\n"
 "PO-Revision-Date: 2026-03-28 10:00+0100\n"
 "Last-Translator: Mohamed <mohamed@example.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -18,21 +18,21 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: core/context_processors.py:11
-msgid "SnapStore"
-msgstr "سناب ستور"
+#: core/context_processors.py:12
+msgid "StarterKit"
+msgstr ""
 
-#: core/context_processors.py:13
-msgid "AI-Powered Landing Pages"
-msgstr "صفحات هبوط مدعومة بالذكاء الاصطناعي"
+#: core/context_processors.py:14
+msgid "Modern Django Scaffolding"
+msgstr ""
 
-#: core/context_processors.py:25
-msgid "Generate high-converting landing pages in seconds with Gemini AI."
-msgstr "أنشئ صفحات هبوط عالية التحويل في ثوانٍ باستخدام ذكاء Gemini الاصطناعي."
+#: core/context_processors.py:26
+msgid "Generic Django Starter Kit."
+msgstr ""
 
-#: core/context_processors.py:28
-msgid "landing page, ai, gemini, merchant, ecommerce, conversion"
-msgstr "صفحة هبوط، ذكاء اصطناعي، جيميناي، تاجر، تجارة إلكترونية، تحويل"
+#: core/context_processors.py:29
+msgid "django, boilerplate, starter kit"
+msgstr ""
 
 #: core/settings.py:127
 msgid "العربية"
@@ -54,6 +54,62 @@ msgstr "لوحة التحكم"
 #: dashboard/context_processors.py:17
 msgid "users"
 msgstr "المستخدمون"
+
+#: dashboard/models.py:11
+msgid "معلومة"
+msgstr ""
+
+#: dashboard/models.py:12
+msgid "نجاح"
+msgstr ""
+
+#: dashboard/models.py:13
+msgid "تحذير"
+msgstr ""
+
+#: dashboard/models.py:14
+msgid "خطأ"
+msgstr ""
+
+#: dashboard/models.py:20
+msgid "المستخدم"
+msgstr ""
+
+#: dashboard/models.py:22
+msgid "العنوان"
+msgstr ""
+
+#: dashboard/models.py:23
+msgid "الرسالة"
+msgstr ""
+
+#: dashboard/models.py:28
+msgid "نوع الإشعار"
+msgstr ""
+
+#: dashboard/models.py:30
+msgid "مقروء"
+msgstr ""
+
+#: dashboard/models.py:31
+msgid "تاريخ الإنشاء"
+msgstr ""
+
+#: dashboard/models.py:32
+msgid "تاريخ القراءة"
+msgstr ""
+
+#: dashboard/models.py:36
+msgid "الرابط"
+msgstr ""
+
+#: dashboard/models.py:37
+msgid "رابط اختياري للتنقل"
+msgstr ""
+
+#: dashboard/models.py:41
+msgid "إشعار"
+msgstr ""
 
 #: dashboard/templates/components/notification_dropdown.html:12
 msgid "Notifications"
@@ -164,13 +220,16 @@ msgstr "رؤى ذكية"
 msgid ""
 "System performance is optimal. All 5 services are running within expected "
 "latency bounds."
-msgstr "أداء النظام مثالي. جميع الخدمات الـ 5 تعمل ضمن حدود زمن الاستجابة المتوقعة."
+msgstr ""
+"أداء النظام مثالي. جميع الخدمات الـ 5 تعمل ضمن حدود زمن الاستجابة المتوقعة."
 
 #: dashboard/templates/dash/dash_home.html:171
 msgid ""
 "AI has detected a growth trend in your user engagement. Consider launching a "
 "new campaign to capitalize on this traffic."
-msgstr "اكتشف الذكاء الاصطناعي اتجاهاً للنمو في تفاعل المستخدمين. فكر في إطلاق حملة جديدة للاستفادة من هذا الزخم."
+msgstr ""
+"اكتشف الذكاء الاصطناعي اتجاهاً للنمو في تفاعل المستخدمين. فكر في إطلاق حملة "
+"جديدة للاستفادة من هذا الزخم."
 
 #: dashboard/templates/dash/dash_home.html:174
 msgid "Take Action"
@@ -387,8 +446,10 @@ msgstr "لم يتم العثور على مستخدمين"
 msgid "Try adjusting your filters"
 msgstr "حاول تعديل خيارات التصفية"
 
-#: dashboard/utils.py:18
-msgid "Your SOC Account has been Activated!"
+#: dashboard/utils.py:22
+#, fuzzy, python-format
+#| msgid "Your SOC Account has been Activated!"
+msgid "Your %(site)s Account has been Activated!"
 msgstr "تم تفعيل حسابك!"
 
 #: dashboard/views/dashboard.py:19
@@ -546,7 +607,8 @@ msgstr "دعم لغوي عالمي"
 
 #: frontend/templates/home.html:85
 msgid "Built-in RTL support for Arabic markets."
-msgstr "دعم مدمج للغات التي تكتب من اليمين إلى اليسار (RTL) لخدمة الأسواق العربية."
+msgstr ""
+"دعم مدمج للغات التي تكتب من اليمين إلى اليسار (RTL) لخدمة الأسواق العربية."
 
 #: frontend/templates/home.html:89
 msgid "Developer Friendly"
@@ -611,7 +673,9 @@ msgstr "جاهز للبدء في البناء؟"
 msgid ""
 "Join the elite group of developers using %(site_name)s to ship faster and "
 "cleaner code."
-msgstr "انضم إلى نخبة المطورين الذين يستخدمون %(site_name)s لإطلاق مشاريعهم بكود أسرع وأنظف."
+msgstr ""
+"انضم إلى نخبة المطورين الذين يستخدمون %(site_name)s لإطلاق مشاريعهم بكود "
+"أسرع وأنظف."
 
 #: frontend/templates/home.html:172
 msgid "Get Started Now"
@@ -816,3 +880,16 @@ msgstr "هذا البريد الإلكتروني مسجل بالفعل."
 #: user_auth/views.py:116
 msgid "Your account has been created successfully."
 msgstr "تم إنشاء حسابك بنجاح."
+
+#~ msgid "SnapStore"
+#~ msgstr "سناب ستور"
+
+#~ msgid "AI-Powered Landing Pages"
+#~ msgstr "صفحات هبوط مدعومة بالذكاء الاصطناعي"
+
+#~ msgid "Generate high-converting landing pages in seconds with Gemini AI."
+#~ msgstr ""
+#~ "أنشئ صفحات هبوط عالية التحويل في ثوانٍ باستخدام ذكاء Gemini الاصطناعي."
+
+#~ msgid "landing page, ai, gemini, merchant, ecommerce, conversion"
+#~ msgstr "صفحة هبوط، ذكاء اصطناعي، جيميناي، تاجر، تجارة إلكترونية، تحويل"

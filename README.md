@@ -56,22 +56,16 @@ A robust, centralized, and highly customizable Django boilerplate designed for r
 
 ## Customization
 
-### 1. Site Details & Branding
-Edit `core/context_processors.py` to change global settings:
-```python
-"site_config": {
-    "name": _("Your Project"),
-    "ar_name": "مشروعك",
-    "branding": {
-        "primary_color": "#0d6efd", # Your brand primary
-        "secondary_color": "#6c757d",
-        ...
-    }
-}
+### 1. Environment Configuration
+Copy `.env.example` to `.env` and update the variables:
+```bash
+cp .env.example .env
 ```
+Most site settings (Name, Tagline, Colors, SEO) are now controlled directly via the `.env` file.
 
 ### 2. Dashboard Navigation & RBAC
 Manage menu items in `dashboard/context_processors.py`. Use the `admin_only` flag to restrict links to superusers.
+
 
 ### 3. Styling
 All stylesheets reference the original variables in `frontend/static/css/index.css`. **Never use hardcoded hex colors** in new CSS files; always reference `var(--brand-primary)`, `var(--brand-secondary)`, etc.

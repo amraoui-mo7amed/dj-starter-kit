@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-28 08:48+0100\n"
+"POT-Creation-Date: 2026-03-28 09:16+0100\n"
 "PO-Revision-Date: 2026-03-28 10:00+0100\n"
 "Last-Translator: Mohamed <mohamed@example.com>\n"
 "Language-Team: English <en@li.org>\n"
@@ -17,21 +17,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/context_processors.py:11
-msgid "SnapStore"
-msgstr "SnapStore"
+#: core/context_processors.py:12
+msgid "StarterKit"
+msgstr ""
 
-#: core/context_processors.py:13
-msgid "AI-Powered Landing Pages"
-msgstr "AI-Powered Landing Pages"
+#: core/context_processors.py:14
+msgid "Modern Django Scaffolding"
+msgstr ""
 
-#: core/context_processors.py:25
-msgid "Generate high-converting landing pages in seconds with Gemini AI."
-msgstr "Generate high-converting landing pages in seconds with Gemini AI."
+#: core/context_processors.py:26
+msgid "Generic Django Starter Kit."
+msgstr ""
 
-#: core/context_processors.py:28
-msgid "landing page, ai, gemini, merchant, ecommerce, conversion"
-msgstr "landing page, ai, gemini, merchant, ecommerce, conversion"
+#: core/context_processors.py:29
+msgid "django, boilerplate, starter kit"
+msgstr ""
 
 #: core/settings.py:127
 msgid "العربية"
@@ -53,6 +53,62 @@ msgstr "Dashboard"
 #: dashboard/context_processors.py:17
 msgid "users"
 msgstr "Users"
+
+#: dashboard/models.py:11
+msgid "معلومة"
+msgstr ""
+
+#: dashboard/models.py:12
+msgid "نجاح"
+msgstr ""
+
+#: dashboard/models.py:13
+msgid "تحذير"
+msgstr ""
+
+#: dashboard/models.py:14
+msgid "خطأ"
+msgstr ""
+
+#: dashboard/models.py:20
+msgid "المستخدم"
+msgstr ""
+
+#: dashboard/models.py:22
+msgid "العنوان"
+msgstr ""
+
+#: dashboard/models.py:23
+msgid "الرسالة"
+msgstr ""
+
+#: dashboard/models.py:28
+msgid "نوع الإشعار"
+msgstr ""
+
+#: dashboard/models.py:30
+msgid "مقروء"
+msgstr ""
+
+#: dashboard/models.py:31
+msgid "تاريخ الإنشاء"
+msgstr ""
+
+#: dashboard/models.py:32
+msgid "تاريخ القراءة"
+msgstr ""
+
+#: dashboard/models.py:36
+msgid "الرابط"
+msgstr ""
+
+#: dashboard/models.py:37
+msgid "رابط اختياري للتنقل"
+msgstr ""
+
+#: dashboard/models.py:41
+msgid "إشعار"
+msgstr ""
 
 #: dashboard/templates/components/notification_dropdown.html:12
 msgid "Notifications"
@@ -163,13 +219,17 @@ msgstr "Smart Insights"
 msgid ""
 "System performance is optimal. All 5 services are running within expected "
 "latency bounds."
-msgstr "System performance is optimal. All 5 services are running within expected latency bounds."
+msgstr ""
+"System performance is optimal. All 5 services are running within expected "
+"latency bounds."
 
 #: dashboard/templates/dash/dash_home.html:171
 msgid ""
 "AI has detected a growth trend in your user engagement. Consider launching a "
 "new campaign to capitalize on this traffic."
-msgstr "AI has detected a growth trend in your user engagement. Consider launching a new campaign to capitalize on this traffic."
+msgstr ""
+"AI has detected a growth trend in your user engagement. Consider launching a "
+"new campaign to capitalize on this traffic."
 
 #: dashboard/templates/dash/dash_home.html:174
 msgid "Take Action"
@@ -386,8 +446,10 @@ msgstr "No users found"
 msgid "Try adjusting your filters"
 msgstr "Try adjusting your filters"
 
-#: dashboard/utils.py:18
-msgid "Your SOC Account has been Activated!"
+#: dashboard/utils.py:22
+#, fuzzy, python-format
+#| msgid "Your SOC Account has been Activated!"
+msgid "Your %(site)s Account has been Activated!"
 msgstr "Your Account has been Activated!"
 
 #: dashboard/views/dashboard.py:19
@@ -554,7 +616,8 @@ msgstr "Developer Friendly"
 #: frontend/templates/home.html:90
 msgid ""
 "Written in clean Python with extensive documentation and helper utilities."
-msgstr "Written in clean Python with extensive documentation and helper utilities."
+msgstr ""
+"Written in clean Python with extensive documentation and helper utilities."
 
 #: frontend/templates/home.html:103
 msgid "Code Quality"
@@ -583,7 +646,8 @@ msgstr "Clone the Repository"
 #: frontend/templates/home.html:140
 msgid ""
 "Grab the source code and install the dependencies with a single command."
-msgstr "Grab the source code and install the dependencies with a single command."
+msgstr ""
+"Grab the source code and install the dependencies with a single command."
 
 #: frontend/templates/home.html:146
 msgid "Customize Branding"
@@ -610,7 +674,9 @@ msgstr "Ready to Start Building?"
 msgid ""
 "Join the elite group of developers using %(site_name)s to ship faster and "
 "cleaner code."
-msgstr "Join the elite group of developers using %(site_name)s to ship faster and cleaner code."
+msgstr ""
+"Join the elite group of developers using %(site_name)s to ship faster and "
+"cleaner code."
 
 #: frontend/templates/home.html:172
 msgid "Get Started Now"
@@ -815,3 +881,15 @@ msgstr "This email is already registered."
 #: user_auth/views.py:116
 msgid "Your account has been created successfully."
 msgstr "Your account has been created successfully."
+
+#~ msgid "SnapStore"
+#~ msgstr "SnapStore"
+
+#~ msgid "AI-Powered Landing Pages"
+#~ msgstr "AI-Powered Landing Pages"
+
+#~ msgid "Generate high-converting landing pages in seconds with Gemini AI."
+#~ msgstr "Generate high-converting landing pages in seconds with Gemini AI."
+
+#~ msgid "landing page, ai, gemini, merchant, ecommerce, conversion"
+#~ msgstr "landing page, ai, gemini, merchant, ecommerce, conversion"

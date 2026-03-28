@@ -11,11 +11,15 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+from decouple import config
+
+
 def send_account_activation_email(request, profile):
     """
-    Sends an account activation email to the merchant after approval.
+    Sends an account activation email to the user after approval.
     """
-    subject = _("Your SOC Account has been Activated!")
+    site_name = config("SITE_NAME", default="StarterKit")
+    subject = _("Your %(site)s Account has been Activated!") % {"site": site_name}
     login_url = request.build_absolute_uri(reverse("user_auth:login"))
 
     context = {
@@ -27,7 +31,7 @@ def send_account_activation_email(request, profile):
     html_content = render_to_string("email/account_activation.html", context)
     text_content = strip_tags(html_content)
 
-    from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "no-reply@soc.com")
+    from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "no-reply@example.com")
 
     email = EmailMultiAlternatives(
         subject, text_content, from_email, [profile.user.email]
