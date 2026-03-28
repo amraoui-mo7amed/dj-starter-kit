@@ -2,23 +2,24 @@
 Starter Kit Brand Variables
 ==========================*/
 :root {
-  /* Brand Primary Colors */
-  --brand-primary: var(--primary-color);
-  --brand-secondary: var(--secondary-color);
-  --brand-accent: var(--accent-color);
+  /* Brand Primary Colors - Mapped from HTML injection with fallbacks */
+  --brand-primary: var(--primary-color, #0d6efd);
+  --brand-secondary: var(--secondary-color, #6c757d);
+  --brand-accent: var(--accent-color, #ffc107);
   
   /* Functional Colors */
-  --brand-success: var(--success-color);
-  --brand-danger: var(--danger-color);
-  --brand-dark: var(--dark-color);
-  --brand-light: var(--light-color);
+  --brand-success: var(--success-color, #198754);
+  --brand-danger: var(--danger-color, #dc3545);
+  --brand-dark: var(--dark-color, #212529);
+  --brand-light: var(--light-color, #f8f9fa);
 
   /* Layout Variables */
-  --bg-canvas: #f4f7f6;
+  --bg-canvas: var(--brand-light);
   --white-accent: #FFFFFF;
   --text-main: #1A1A1A;
   --border-color: #e2e8f0;
 }
+
 
 /* == Start of Custom Select */
 .custom-select-wrapper {

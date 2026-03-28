@@ -1,8 +1,8 @@
-# Django Starter Kit 🚀
+# Django Starter Kit
 
 A robust, centralized, and highly customizable Django boilerplate designed for rapid project scaffolding. This kit focuses on "Single Point of Truth" configuration, multi-language support (RTL/LTR), and modern UI components.
 
-## 🌟 Key Features
+## Key Features
 
 - **Centralized Configuration**: Manage site name, logo, contact details, and SEO metadata from a single Python file (`core/context_processors.py`).
 - **Dynamic Branding**: UI colors are driven by CSS variables injected from the backend. Change your brand colors in one place, and the entire site (Dashboard & Frontend) updates instantly.
@@ -15,16 +15,16 @@ A robust, centralized, and highly customizable Django boilerplate designed for r
 - **Unified Design System**: Consistent visual identity across the landing page and the administrative dashboard using a shared variable-driven CSS architecture.
 - **AJAX-First Pattern**: Guidelines and utilities for standardizing AJAX updates and deletes with translatable feedback.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Backend**: Django 5.2+
-- **Environment**: python-decouple (for `.env` management)
+- **Environment**: python-decouple (for .env management)
 - **Styling**: Bootstrap 5.3 + Custom CSS Variables
 - **Icons**: FontAwesome 5
 - **Animations**: AOS (Animate On Scroll)
 - **Real-time**: Django EventStream + SSE support
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Clone & Install**:
    ```bash
@@ -33,7 +33,7 @@ A robust, centralized, and highly customizable Django boilerplate designed for r
    ```
 
 2. **Configure Environment**:
-   Create a `.env` file based on the project requirements (SECRET_KEY, DB settings, etc.).
+   Create a .env file based on the project requirements (SECRET_KEY, DB settings, etc.).
 
 3. **Database Setup**:
    ```bash
@@ -46,7 +46,7 @@ A robust, centralized, and highly customizable Django boilerplate designed for r
    python manage.py runserver
    ```
 
-## 🎨 Customization
+## Customization
 
 ### 1. Site Details & Branding
 Edit `core/context_processors.py` to change global settings:
@@ -72,13 +72,13 @@ python manage.py makemessages -l ar
 python manage.py compilemessages
 ```
 
-## 📏 Development Guidelines
+## Development Guidelines
 
 - **Components**: Always use `dashboard/templates/components/` for selects and pagination.
-- **Forms**: Add the `.form` class and use `partials/errorList.html` for validation errors.
-- **Logic**: Helper functions belong in `<app>/utils.py`.
+- **Forms**: Add the .form class and use `partials/errorList.html` for validation errors.
+- **Logic**: Helper functions belong in <app>/utils.py.
 - **UI Actions**: Use SweetAlert for confirmation and AJAX for object updates/deletions.
 
-## 📄 License
+## License
 
 This is a generic boilerplate for future projects. Customize and extend as needed.

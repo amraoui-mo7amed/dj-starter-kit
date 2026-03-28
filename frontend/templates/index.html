@@ -15,7 +15,7 @@
         <link rel="icon" type="image/png" href="{% static 'icons/logo.jpg' %}" />
         <title>
             {% if IS_RTL %}
-                {{ site_config.ar_name }} |
+                {{ site_config.ar_name }} 
             {% else %}
                 {{ site_config.name }}
             {% endif %}
@@ -24,61 +24,13 @@
         </title>
         <style>
             :root {
-                --primary-color: {
-                        {
-                        site_config.branding.primary_color
-                    }
-                }
-
-                ;
-
-                --secondary-color: {
-                        {
-                        site_config.branding.secondary_color
-                    }
-                }
-
-                ;
-
-                --accent-color: {
-                        {
-                        site_config.branding.accent_color
-                    }
-                }
-
-                ;
-
-                --success-color: {
-                        {
-                        site_config.branding.success_color
-                    }
-                }
-
-                ;
-
-                --danger-color: {
-                        {
-                        site_config.branding.danger_color
-                    }
-                }
-
-                ;
-
-                --dark-color: {
-                        {
-                        site_config.branding.dark_color
-                    }
-                }
-
-                ;
-
-                --light-color: {
-                        {
-                        site_config.branding.light_color
-                    }
-                }
-
-                ;
+                --primary-color: {{ site_config.branding.primary_color }};
+                --secondary-color: {{ site_config.branding.secondary_color }};
+                --accent-color: {{ site_config.branding.accent_color }};
+                --success-color: {{ site_config.branding.success_color }};
+                --danger-color: {{ site_config.branding.danger_color }};
+                --dark-color: {{ site_config.branding.dark_color }};
+                --light-color: {{ site_config.branding.light_color }};
             }
         </style>
         <!-- Bootstrap CSS -->
