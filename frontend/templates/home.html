@@ -17,7 +17,10 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 sticky-top shadow-sm">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-                <span class="fw-bold text-dark">{% website_name %}</span>
+                <img src="{% static 'icons/logo.jpg' %}" alt="Logo" style="height: 40px;" class="rounded">
+                <span class="fw-bold text-dark">
+                    {% if IS_RTL %}{{ site_config.ar_name }}{% else %}{{ site_config.name }}{% endif %}
+                </span>
             </a>
             <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#landingNav">
                 <span class="navbar-toggler-icon"></span>
@@ -51,36 +54,26 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 hero-content" data-aos="fade-right">
                     <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3 fw-bold">
-                        {% trans "Smart Operating Cycle" %} 1.0
+                        {{ site_config.tagline }}
                     </span>
                     <h1 class="hero-title">
-                        {% trans "Take Control of Your Business Cycle" %}
+                        {% blocktrans with site_name=site_config.name %}Scaffold Your Next Project with {{ site_name }}{% endblocktrans %}
                     </h1>
                     <p class="hero-subtitle">
-                        {% trans "A comprehensive SaaS platform designed for Algerian SMEs to manage inventory, sales, and production with AI-powered insights." %}
+                        {{ site_config.seo.description }}
                     </p>
                     <div class="d-flex flex-wrap gap-3">
                         <a href="{% url 'user_auth:signup' %}" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow">
-                            {% trans "Start Free Trial" %}
+                            {% trans "Get Started" %}
                         </a>
                         <a href="#features" class="btn btn-outline-primary btn-lg rounded-pill px-5 fw-bold">
                             {% trans "Learn More" %}
                         </a>
                     </div>
-                    <div class="mt-5 d-flex align-items-center gap-4 text-muted">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="fas fa-check-circle text-success"></i>
-                            <span class="small fw-bold">{% trans "No credit card required" %}</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="fas fa-check-circle text-success"></i>
-                            <span class="small fw-bold">{% trans "Multi-language support" %}</span>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left">
                     <div class="hero-image-placeholder shadow-lg rounded-4 p-4 bg-white" style="border: 8px solid #f1f3f7;">
-                        <img src="{% static "icons/logo.jpg" %}" alt="SOC Logo" class="img-fluid rounded-3 mb-4 mx-auto d-block" style="max-height: 100px;">
+                        <img src="{% static "icons/logo.jpg" %}" alt="Logo" class="img-fluid rounded-3 mb-4 mx-auto d-block" style="max-height: 100px;">
                         <div class="skeleton-ui">
                             <div class="bg-light rounded-2 mb-3" style="height: 40px; width: 80%;"></div>
                             <div class="row g-3 mb-4">
@@ -94,6 +87,7 @@
             </div>
         </div>
     </header>
+
 
     <!-- ======= Features Section ======= -->
     <section id="features" class="section-features">
@@ -254,9 +248,11 @@
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-4">
-                    <h4 class="fw-bold mb-4">{% website_name %}</h4>
+                    <h4 class="fw-bold mb-4">
+                        {% if IS_RTL %}{{ site_config.ar_name }}{% else %}{{ site_config.name }}{% endif %}
+                    </h4>
                     <p class="text-secondary small">
-                        {% trans "A comprehensive SaaS platform for managing operating cycles of small and medium enterprises (SMEs) in Algeria." %}
+                        {{ site_config.seo.description }}
                     </p>
                 </div>
                 <div class="col-lg-2 ms-auto">
@@ -269,17 +265,18 @@
                 </div>
                 <div class="col-lg-3">
                     <h6 class="fw-bold mb-4">{% trans "Contact" %}</h6>
-                    <p class="text-secondary small mb-1"><i class="fas fa-university me-2"></i> {% trans "Kasdi Merbah University" %}</p>
-                    <p class="text-secondary small"><i class="fas fa-map-marker-alt me-2"></i> {% trans "Ouargla, Algeria" %}</p>
+                    {% if site_config.contact_email %}
+                        <p class="text-secondary small mb-1"><i class="fas fa-envelope me-2"></i> {{ site_config.contact_email }}</p>
+                    {% endif %}
+                    {% if site_config.phone %}
+                        <p class="text-secondary small mb-1"><i class="fas fa-phone me-2"></i> {{ site_config.phone }}</p>
+                    {% endif %}
                 </div>
             </div>
             <hr class="my-5 border-secondary opacity-25">
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
                 <p class="mb-0 text-secondary small">
-                    &copy; 2026 SOC. {% trans "All rights reserved." %}
-                </p>
-                <p class="mb-0 text-secondary small">
-                    {% trans "Developed by Amal Bensherif & Soumahan Tembokto" %}
+                    &copy; {% now "Y" %} {% if IS_RTL %}{{ site_config.ar_name }}{% else %}{{ site_config.name }}{% endif %}. {% trans "All rights reserved." %}
                 </p>
             </div>
         </div>
